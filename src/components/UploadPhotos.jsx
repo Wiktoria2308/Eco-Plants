@@ -1,0 +1,81 @@
+import { useCallback, useState } from "react";
+import Alert from "react-bootstrap/Alert";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import { useDropzone } from "react-dropzone";
+import useUploadPhotos from "../hooks/useUploadPhotos";
+import { Button } from "react-bootstrap";
+import { useAuthContext } from "../contexts/AuthContext";
+
+const UploadPhotos = ({ product_id }) => {
+	const { isAdmin } = useAuthContext();
+
+	const [info, setInfo] = useState(null);
+
+	const uploadPhotos = useUploadPhotos();
+
+	const onDrop = useCallback((acceptedFiles) => {
+		if (!acceptedFiles.length) {
+			return;
+		}
+		setInfo(null);
+		acceptedFiles.forEach((file) => {
+			uploadPhotos.upload(file, product_id);
+		});
+	}, []);
+
+	const onDropRejected = useCallback((test) => {
+		setInfo(test[0].errors[0].message);
+	}, []);
+
+	const { getRootProps, getInputProps } = useDropzone({
+		accept: {
+			"image/gif": [],
+			"image/jpeg": [],
+			"image/png": [],
+			"image/webp": [],
+		},
+		maxFiles: 5,
+		maxSize: 4 * 1024 * 1024,
+		onDrop,
+		onDropRejected,
+	});
+
+	return (
+		<>
+			<div {...getRootProps()} id="dropzone-wrapper" className="text-center">
+				<input {...getInputProps()} />
+				<Button
+					className="m-3 upload-photos-button"
+					onClick={() => {
+						setInfo(null);
+					}}
+				>
+					Upload photos
+				</Button>
+
+				{/* Upload Progress Bar */}
+				{uploadPhotos.progress !== null && (
+					<ProgressBar
+						variant="success"
+						animated
+						now={uploadPhotos.progress}
+						label={`${uploadPhotos.progress}%`}
+					/>
+				)}
+
+				{info && <Alert variant="danger">{info}</Alert>}
+				{uploadPhotos.isError && (
+					<Alert variant="danger">Failed to upload files</Alert>
+				)}
+				{uploadPhotos.isUploading && (
+					<Alert variant="warning">Your photos are uploading</Alert>
+				)}
+				{uploadPhotos.isSuccess && isAdmin && (
+					<Alert variant="success">Your photos uploaded</Alert>
+				)}
+			</div>
+		</>
+	);
+};
+
+export default UploadPhotos;
