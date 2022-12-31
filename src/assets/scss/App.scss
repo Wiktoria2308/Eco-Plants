@@ -1,9 +1,8 @@
 @import "bootstrap/scss/bootstrap";
 @import "react-toastify/scss/main";
 @import "toastify";
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
-$font-family: 'Lato', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+$font-family: 'Cabin', sans-serif;
 $orange-color: #F1B24A;
 $ligt-green: #9DC88D;
 $dark-green: #4D774E;
@@ -21,15 +20,202 @@ body {
 }
 
 .brand-title {
-	width: 10%;
+	width: 20%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-
+.nav-link {
+  padding-bottom: 0;
+}
+.nav-link:hover {
+  color: $white;
+}
 .nav-color {
 font-size: 18px;
 font-weight: 600;
 color: $white;
 }
 .nav-color:first-child{
-  margin-right: 40px !important;
+  margin-right: 30px !important;
+}
+
+.home-header-container {
+  display: flex;
+  height: 500px;
+}
+.home-heading-container {
+  flex-basis: 50%;
+  color: $white;
+  text-align: center;
+  position: relative;
+  top: 50%;
+}
+.home-image-container {
+  // background-image: url("../images/plant.png");
+  flex-basis: 50%;
+  // background-position: right;
+  // background-repeat: no-repeat;
+  // background-size: 900px;
+}
+.home-heading-container h1{
+  font-size: 50px;
+}
+.home-heading-container p {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 19px;
+}
+
+
+// Button Shop Now - start
+.btn-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-shop-now {
+	--width: 180px;
+	--height: 60px;
+	border: 2px solid $orange-color;
+	position: relative;
+	min-width: var(--width);
+	min-height: var(--height);
+	border-radius: var(--height);
+	color: #fff;
+	font-weight: bold;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 1rem;
+  background:none;
+
+	.text,
+	.icon-container {
+		position: relative;
+		z-index: 2;
+	}
+
+	.icon-container {
+		--icon-size: 25px;
+		position: relative;
+		width: var(--icon-size);
+		height: var(--icon-size);
+		margin-left: 15px;
+		transition: transform 500ms ease;
+
+		.icon {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: var(--icon-size);
+			height: var(--icon-size);
+			transition: transform 500ms ease, opacity 250ms ease;
+
+			&--left {
+				transform: translateX(-200%);
+				opacity: 0;
+			}
+
+			svg {
+				width: 100%;
+				height: 100%;
+				fill: #fff;
+			}
+		}
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: var(--height);
+		z-index: 1;
+		transition: transform 500ms ease;
+	}
+
+	&:hover {
+   
+		&::after {
+			transform: translateX(65%);
+      background: #F1B24A;
+		}
+
+		.icon-container {
+			transform: translateX(70%);
+			.icon {
+				&--left {
+					transform: translateX(0);
+					opacity: 1;
+				}
+				&--right {
+					transform: translateX(200%);
+					opacity: 0;
+				}
+			}
+		}
+	}
+}
+// Button Shop Now - End
+
+
+.line-style {
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  white-space: nowrap;
+  color: $white;
+}
+
+.line-style::before,
+.line-style::after {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: $white;
+  top: 100%;
+  left: 0;
+  pointer-events: none;
+}
+
+.line-style::before {
+  content: '';
+}
+
+.line-style-link::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.line-style-link:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+  transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+.line-style-link::after {
+  content: '';
+  top: calc(100% + 4px);
+  transform-origin: 0% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.line-style-link:hover::after {
+  transform-origin: 100% 50%;
+  transform: scale3d(1, 1, 1);
+  transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+}
+
+.crousel-item{
+  transition: opacity 1s !important;
+}
+.carousel-item.active{
+  transition: opacity 1s !important;
 }

@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import { NavDropdown, Image } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import Title from "../assets/icons/plant-icon.png";
+import Title from "../assets/images/Eco-plants.png";
 import Avatar from "../assets/images/avatar.jpeg"
 
 const Navigation = () => {
@@ -20,12 +20,12 @@ const Navigation = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav" className="nav-links">
 					<Nav className="ms-auto align-items-end">
-						<Nav.Link className="nav-color" as={NavLink} to="/products">
+						<Nav.Link className="nav-color line-style line-style-link" as={NavLink} to="/products">
 							Products
 						</Nav.Link>
 						{!currentUser && !isAdmin && (
 							<>
-								<Nav.Link className="nav-color" as={NavLink} to="/login">
+								<Nav.Link className="nav-color line-style line-style-link" as={NavLink} to="/login">
 									Login/Signup
 								</Nav.Link>
 							</>
