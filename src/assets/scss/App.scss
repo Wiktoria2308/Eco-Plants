@@ -66,14 +66,10 @@ color: $white;
   color: $white;
   text-align: center;
   position: relative;
-  top: 50%;
+  top: 35%;
 }
 .home-image-container {
-  // background-image: url("../images/plant.png");
   flex-basis: 50%;
-  // background-position: right;
-  // background-repeat: no-repeat;
-  // background-size: 900px;
 }
 .home-heading-container h1{
   font-size: 50px;
