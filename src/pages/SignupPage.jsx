@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import SignupForm from "../components/SignupForm";
 
@@ -8,19 +8,19 @@ const SignupPage = () => {
 	const [formValues, setFormValues] = useState();
 
 	const { signup } = useAuthContext();
-	const navigate = useNavigate();
+	
 
 	useEffect(() => {
 		if (!formValues) {
 			return;
 		}
-		signup(
-			formValues.email,
-			formValues.password,
-			formValues.name,
-			formValues.photo
-		);
-		navigate("/");
+			signup(
+				formValues.email,
+				formValues.password,
+				formValues.name,
+				formValues.photo
+			);
+		
 	}, [formValues]);
 
 	return (

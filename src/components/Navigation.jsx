@@ -6,12 +6,27 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import Title from "../assets/images/Eco-plants.png";
 import Avatar from "../assets/images/avatar.jpeg"
+import { useState, useEffect } from "react";
 
 const Navigation = () => {
 	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext();
+	const [navbar, setNavbar] = useState(false);
+	//navbar scroll changeBackground function
+  const changeBackground = () => {
+    if (window.scrollY >= 97) {
+      setNavbar(true)
+    } else {
+      setNavbar(false)
+    }
+  }
+  useEffect(() => {
+    changeBackground()
+    // adding the event when scroll change background
+    window.addEventListener("scroll", changeBackground)
+  })
 
 	return (
-		<Navbar variant="dark" expand="md" className="navbar">
+		<Navbar variant="dark" expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
 			<Container className="justify-content-end ">
 				<Navbar.Brand as={Link} to="/" className="nav-brand col-9 col-md-6">
 					<img className="brand-title" src={Title} alt="brand-title" />

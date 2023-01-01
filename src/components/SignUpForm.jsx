@@ -1,19 +1,16 @@
 import React, { useRef, useState } from "react";
 import {
-	Container,
-	Row,
-	Col,
 	Form,
 	Button,
-	Card,
 	Alert,
 } from "react-bootstrap";
+
 
 const SignupForm = ({ setFormValues }) => {
 	const [photo, setPhoto] = useState(false);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
-
+	
 	const emailRef = useRef();
 	const displayNameRef = useRef();
 	const passwordRef = useRef();
@@ -34,9 +31,10 @@ const SignupForm = ({ setFormValues }) => {
 		if (passwordRef.current.value !== passwordConfirmRef.current.value) {
 			return setError("The passwords does not match");
 		}
+		
+        setError(null); 
 
-		setError(null);
-
+		
 		try {
 			setLoading(true);
 
@@ -46,12 +44,14 @@ const SignupForm = ({ setFormValues }) => {
 				name: displayNameRef.current.value,
 				photo,
 			});
+
 		} catch (err) {
 			setError(err.message);
 			setLoading(false);
 		}
+		
 	};
-
+	
 	return (
 		<>
 			{error && <Alert variant="danger">{error}</Alert>}

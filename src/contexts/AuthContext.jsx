@@ -8,11 +8,15 @@ import {
 	updateEmail,
 	updatePassword,
 	updateProfile,
+	reload,
 } from "firebase/auth";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { auth, db, storage } from "../firebase";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 const AuthContext = createContext();
 
@@ -27,8 +31,10 @@ const AuthContextProvider = ({ children }) => {
 	const [userPhotoUrl, setUserPhotoUrl] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [isAdmin, setIsAdmin] = useState(false);
+	const navigate = useNavigate();
 
 	const signup = async (email, password, name, photo) => {
+		try {
 		await createUserWithEmailAndPassword(auth, email, password);
 
 		const docRef = doc(db, "users", auth.currentUser.uid);
@@ -38,10 +44,23 @@ const AuthContextProvider = ({ children }) => {
 			photoURL: auth.currentUser.photoURL,
 			isAdmin: false,
 		});
+		toast.success("Account created!");
 
 		await setDisplayNameAndPhoto(name, photo);
 
 		await reloadUser();
+		navigate('/');
+		}
+		catch (err) {
+			if(err.code === 'auth/email-already-in-use'){
+				toast.error('Email already in use.');
+			}
+			setTimeout(() => {
+				document.location.reload();
+			  }, 4000);
+		
+	    }
+
 	};
 
 	const login = (email, password) => {
