@@ -7,6 +7,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import Title from "../assets/images/Eco-plants.png";
 import Avatar from "../assets/images/avatar.jpeg"
 import { useState, useEffect } from "react";
+import { SlArrowDown } from 'react-icons/sl';
 
 const Navigation = () => {
 	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext();
@@ -48,7 +49,7 @@ const Navigation = () => {
 						{currentUser && !isAdmin && (
 							<>
 								<NavDropdown
-									className="nav-color"
+									className="nav-color line-style line-style-link"
 									title={
 										<>
 											<Image
@@ -56,12 +57,14 @@ const Navigation = () => {
 													userPhotoUrl ||
 													Avatar
 												}
+												className="image-avatar"
 												height={30}
 												width={30}
 												fluid
 												roundedCircle
 											/>{" "}
-											<span className="nav-color">{userName}</span>
+											<span className="nav-color user-name">{userName}</span>
+											<SlArrowDown className="arrow-down"/>
 										</>
 									}
 								>
@@ -78,7 +81,7 @@ const Navigation = () => {
 
 						{isAdmin && (
 							<NavDropdown
-								className="nav-color"
+								className="nav-color line-style line-style-link"
 								title={
 									<>
 										<Image
@@ -86,12 +89,14 @@ const Navigation = () => {
 												userPhotoUrl ||
 												Avatar
 											}
+											className="image-avatar"
 											height={30}
 											width={30}
 											fluid
 											roundedCircle
 										/>{" "}
-										<span className="nav-color">{userName}</span>
+										<span className="nav-color user-name">{userName}</span>
+										<SlArrowDown className="arrow-down"/>
 									</>
 								}
 							>

@@ -42,7 +42,21 @@ color: $white;
 .nav-color:first-child{
   margin-right: 30px !important;
 }
-
+.dropdown-toggle::after {
+	display: none;
+}
+.arrow-down {
+	color: white;
+	padding-left: 3px;
+}
+.user-name {
+	position: relative;
+	top:1px;
+}
+.image-avatar {
+	position: relative;
+    bottom: 2px;
+}
 .home-header-container {
   display: flex;
   height: 500px;
