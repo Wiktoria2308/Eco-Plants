@@ -1,5 +1,5 @@
-import { SlArrowDown, SlArrowRight } from "react-icons/sl";
-import { NavDropdown, Dropdown, DropdownButton } from "react-bootstrap";
+import { SlArrowDown } from "react-icons/sl";
+import { NavDropdown, Dropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 const PlantsDropdown = () => {
