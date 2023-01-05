@@ -37,10 +37,13 @@ const Navigation = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav" className="nav-links">
 					<Nav className="ms-auto align-items-end">
+
 					<PlantsDropdown />
+
 					<Nav.Link className="nav-color accessories-link" as={NavLink} to="/accessories">
 							Accessories
 						</Nav.Link>
+
 						{!currentUser && !isAdmin && (
 							<>
 								<Nav.Link className="nav-color line-style line-style-link" as={NavLink} to="/login">
@@ -48,6 +51,7 @@ const Navigation = () => {
 								</Nav.Link>
 							</>
 						)}
+						
 						{currentUser && !isAdmin && (
 							<>
 								<NavDropdown
