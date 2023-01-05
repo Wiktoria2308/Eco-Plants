@@ -1,0 +1,77 @@
+import { SlArrowDown, SlArrowRight } from 'react-icons/sl';
+import { NavDropdown, Dropdown, DropdownButton } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+
+const PlantsDropdown = () => {
+    const [show, setShow] = useState(false);
+  return (
+    <NavDropdown onMouseOver={() => setShow(true)}
+    onMouseLeave={() => setShow(false)}
+      className="nav-color line-style line-style-link products-dropdown"
+      title={
+        <>
+          <span className="nav-color">Products</span>
+          <SlArrowDown className="arrow-down" />
+        </>
+      }
+    >
+      <Dropdown.Menu show={show}
+        className="nav-color products-categories-dropdown house"
+        drop={"end"}
+        title={
+          <>
+            <span
+              className="dropdown-products-title"
+              as={NavLink}
+              to="/house-plants"
+            >
+              Houseplants
+            </span>
+            <SlArrowRight className="arrow-right" />
+          </>
+        }
+      >
+        <Dropdown.Item
+          as={NavLink}
+          to="/house-plants"
+          className="categories-item"
+        >
+          Cactus
+        </Dropdown.Item>
+        <Dropdown.Item
+          as={NavLink}
+          to="/house-plants"
+          className="categories-item"
+        >
+          Orchids
+        </Dropdown.Item>
+      </Dropdown.Menu>
+      <Dropdown.Menu show={show}
+        className="nav-color products-categories-dropdown garden"
+        drop={"end"}
+        title={
+          <>
+            <span
+              className="dropdown-products-title"
+              as={NavLink}
+              to="/garden-plants"
+            >
+              Garden plants
+            </span>
+            <SlArrowRight className="arrow-right" />
+          </>
+        }
+      >
+        <Dropdown.Item
+          as={NavLink}
+          to="/garden-plants"
+          className="categories-item"
+        >
+          Patio plants
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </NavDropdown>
+  );
+};
+export default PlantsDropdown;

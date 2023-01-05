@@ -15,12 +15,12 @@ html {
 body {
 	font-family: $font-family;
 	background: rgb(22,74,65);
-  background: linear-gradient(90deg, rgba(22,74,65,1) 0%, rgba(77,119,78,1) 31%, rgba(157,200,141,1) 100%);
+    background: linear-gradient(90deg, rgba(22,74,65,1) 0%, rgba(77,119,78,1) 31%, rgba(157,200,141,1) 100%);
 	height: 100%;
 }
 
 .brand-title {
-	width: 20%;
+  width: 20%;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -39,20 +39,50 @@ font-size: 18px;
 font-weight: 600;
 color: $white;
 }
-.nav-color:first-child{
-  margin-right: 30px !important;
+.nav-item.dropdown, .accessories-link{
+  margin-right: 20px !important;
 }
-.dropdown-toggle::after {
+.nav-item.dropdown:last-child{
+	margin-right: 0px !important;
+}
+.dropdown-toggle::after, .dropend .dropdown-toggle::after {
 	display: none;
 }
+ 
 .arrow-down {
 	color: white;
-	padding-left: 3px;
+	padding-left: 5px;
+}
+.arrow-right {
+	color:#212529;
+	float: right;
+	font-size: 10px;
+	position: relative;
+    top: 8px;
 }
 .user-name {
 	position: relative;
 	top:1px;
 }
+
+
+.products-dropdown .dropdown-menu, .profile-dropdown .dropdown-menu {
+	width: 100%;
+    min-width: 180px;
+	min-height: 200px;
+	will-change: transform;
+    transform: translate3d(-25px, 5px, 0px);
+}
+
+.dropdown-item:hover{
+	background:#c6dfbd;
+}
+
+.categories-item.active, .categories-item:active{
+	background:none !important;
+}
+
+
 .image-avatar {
 	position: relative;
     bottom: 2px;

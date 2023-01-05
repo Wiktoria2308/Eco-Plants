@@ -8,6 +8,7 @@ import Title from "../assets/images/Eco-plants.png";
 import Avatar from "../assets/images/avatar.jpeg"
 import { useState, useEffect } from "react";
 import { SlArrowDown } from 'react-icons/sl';
+import PlantsDropdown from '../components/PlantsDropdown';
 
 const Navigation = () => {
 	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext();
@@ -36,8 +37,9 @@ const Navigation = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav" className="nav-links">
 					<Nav className="ms-auto align-items-end">
-						<Nav.Link className="nav-color line-style line-style-link" as={NavLink} to="/products">
-							Products
+					<PlantsDropdown />
+					<Nav.Link className="nav-color accessories-link" as={NavLink} to="/accessories">
+							Accessories
 						</Nav.Link>
 						{!currentUser && !isAdmin && (
 							<>
@@ -49,7 +51,7 @@ const Navigation = () => {
 						{currentUser && !isAdmin && (
 							<>
 								<NavDropdown
-									className="nav-color line-style line-style-link"
+									className="nav-color line-style line-style-link profile-dropdown"
 									title={
 										<>
 											<Image
@@ -81,7 +83,7 @@ const Navigation = () => {
 
 						{isAdmin && (
 							<NavDropdown
-								className="nav-color line-style line-style-link"
+								className="nav-color line-style line-style-link profile-dropdown"
 								title={
 									<>
 										<Image
