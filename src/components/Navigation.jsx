@@ -15,7 +15,7 @@ const Navigation = () => {
 	const [navbar, setNavbar] = useState(false);
 	//navbar scroll changeBackground function
   const changeBackground = () => {
-    if (window.scrollY >= 97) {
+    if (window.scrollY >= 47) {
       setNavbar(true)
     } else {
       setNavbar(false)
@@ -110,10 +110,10 @@ const Navigation = () => {
 									Users
 								</NavLink>
 								<NavDropdown.Divider />
-								<NavLink to="/edit_restaurants" className="dropdown-item ">
+								<NavLink to="/edit_products" className="dropdown-item ">
 									Edit products
 								</NavLink>
-								<NavLink to="/create_restaurant" className="dropdown-item">
+								<NavLink to="/create_product" className="dropdown-item">
 									Create product
 								</NavLink>
 								<NavDropdown.Divider />

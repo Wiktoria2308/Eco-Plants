@@ -54,10 +54,17 @@ const PlantsDropdown = () => {
         </Dropdown.Item>
         <Dropdown.Item
           as={NavLink}
-          to="/garden-plants/patio"
+          to="/garden-plants/berry-bushes"
           className="categories-item"
         >
-          Patio plants
+         Berry bushes
+        </Dropdown.Item>
+        <Dropdown.Item
+          as={NavLink}
+          to="/garden-plants/ornamental-shrubs"
+          className="categories-item"
+        >
+         Ornamental shrubs
         </Dropdown.Item>
       </NavDropdown>
       <NavDropdown

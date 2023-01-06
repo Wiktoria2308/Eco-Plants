@@ -40,7 +40,7 @@ const LoginPage = () => {
 						<Card.Body>
 							<Card.Title className="mb-3">Log In</Card.Title>
 
-							{error && <Alert variant="danger">{error}</Alert>}
+							{error ? <Alert variant="danger">{error}</Alert> : null}
 
 							<LoginForm
 								handleSubmit={handleSubmit}

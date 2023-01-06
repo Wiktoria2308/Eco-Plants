@@ -54,7 +54,7 @@ const SignupForm = ({ setFormValues }) => {
 	
 	return (
 		<>
-			{error && <Alert variant="danger">{error}</Alert>}
+			{error ? <Alert variant="danger">{error}</Alert>: null}
 
 			<Form role={"form"} onSubmit={handleSubmit}>
 				<Form.Group id="displayName" className="mb-3">

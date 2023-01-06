@@ -72,7 +72,7 @@ const UsersPage = () => {
 
 	return (
 		<Container className="py-3 table-responsive">
-			{data && <SortableTable columns={columns} data={data} />}
+			{data ? <SortableTable columns={columns} data={data} /> : null}
 		</Container>
 	);
 };

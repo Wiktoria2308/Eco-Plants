@@ -63,7 +63,7 @@ const UploadPhotos = ({ product_id }) => {
 					/>
 				)}
 
-				{info && <Alert variant="danger">{info}</Alert>}
+				{info ? <Alert variant="danger">{info}</Alert> : null}
 				{uploadPhotos.isError && (
 					<Alert variant="danger">Failed to upload files</Alert>
 				)}

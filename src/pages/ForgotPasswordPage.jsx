@@ -45,8 +45,8 @@ const ForgotPasswordPage = () => {
 						<Card.Body>
 							<Card.Title className="mb-3">Forgot Password?</Card.Title>
 
-							{error && <Alert variant="danger">{error}</Alert>}
-							{message && <Alert variant="success">{message}</Alert>}
+							{error ? <Alert variant="danger">{error}</Alert> : null}
+							{message ? <Alert variant="success">{message}</Alert> : null}
 
 							<p>
 								Enter your email address and we will send you a password reset

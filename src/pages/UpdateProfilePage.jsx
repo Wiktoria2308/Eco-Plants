@@ -79,8 +79,8 @@ const UpdateProfilePage = () => {
 					<Card>
 						<Card.Header as="h5">Update Profile</Card.Header>
 						<Card.Body>
-							{error && <Alert variant="danger">{error}</Alert>}
-							{message && <Alert variant="success">{message}</Alert>}
+							{error ? <Alert variant="danger">{error}</Alert> : null}
+							{message ? <Alert variant="success">{message}</Alert> : null}
 
 							<Form onSubmit={handleSubmit}>
 								<div className="d-flex justify-content-center my-3 mx-auto w-50">
