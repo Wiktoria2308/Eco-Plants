@@ -39,7 +39,7 @@ function App() {
 
 				{/* routes for logged in users */}
 				<Route
-					path="/update-profile"
+					path="/update-"
 					element={
 						<RequireAuth>
 							<UpdateProfilePage />

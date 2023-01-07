@@ -105,9 +105,21 @@ $white: #FFFFFF;
     
   }
   
-.error-message {
+.error-message, .select-photo {
   color:rgb(206, 0, 73);
 }
 .create-product-page {
   background-color:#acc7a1;
+}
+
+.create-product-button{
+  background-color: $dark-green;
+  border: 0;
+  color: $white;
+  width: 100px;
+  margin-top: 10px;
+  margin-bottom:10px;
+}
+.create-product-button:hover{
+  background-color: $very-dark-green;
 }

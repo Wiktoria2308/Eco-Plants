@@ -5,10 +5,11 @@ import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 
 const CreateProductForm = () => {
-
+    const [photo, setPhoto] = useState(false);
 	const {
 		formState: { errors },
 		handleSubmit,
@@ -19,12 +20,21 @@ const CreateProductForm = () => {
     
     const watchAllFields = watch();
 
+    const handlePhotoChange = (e) => {
+		if (!e.target.files.length) {
+			setPhoto(null);
+			return;
+		}
+		setPhoto(e.target.files[0]);
+	};
+
 
 	const onCreate = async (data) => {
 	
 		await addDoc(collection(db, "products"), {
 			...data,
 		});
+        // Article number
 
 		toast.success("Product added!");
 		reset();
@@ -71,7 +81,7 @@ const CreateProductForm = () => {
 								})}
 							>
 								<option></option>
-								<option name="houseplants" value="Houseplants">Houseplants</option>
+								<option value="Houseplants">Houseplants</option>
 								<option value="Outdoor plants">Outdoor plants</option>
 								<option value="Seeds">Seeds</option>
 								<option value="Accessories">Accessories</option>
@@ -142,7 +152,7 @@ const CreateProductForm = () => {
 						</Form.Group> : null }
 
                         { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="height" className="mb-3">
-							<Form.Label>Height *</Form.Label>
+							<Form.Label>Height {'(cm)'} *</Form.Label>
 							<Form.Control
 								type="number"
 								{...register("height", {
@@ -152,8 +162,35 @@ const CreateProductForm = () => {
 							{errors.height ? <div className="error-message">{errors.height.message}</div> : null}
 						</Form.Group> : null }
 
+                        { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="pot-size" className="mb-3">
+							<Form.Label>Pot size {'(cm)'} *</Form.Label>
+							<Form.Control
+								type="number"
+								{...register("pot-size", {
+									required: "Please enter the size of the pot.",
+								})}
+							/>
+							{errors.height ? <div className="error-message">{errors.height.message}</div> : null}
+						</Form.Group> : null }
+
+                        { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="location" className="mb-3">
+							<Form.Label>Location *</Form.Label>
+                            <Form.Select
+								className=""
+								{...register("location", {
+									required: "Please select location.",
+								})}
+							>
+								<option></option>
+								<option value="Sun">Sun</option>
+								<option value="Partial sun">Partial sun</option>
+								<option value="(Half) shade">{'(Half)'} shade </option>
+							</Form.Select>
+							{errors.height ? <div className="error-message">{errors.height.message}</div> : null}
+						</Form.Group> : null }
+
                         { watchAllFields.category === "Seeds" ||  watchAllFields.category === "Accessories" ?  <Form.Group controlId="height" className="mb-3">
-							<Form.Label>Height</Form.Label>
+							<Form.Label>Height {'(cm)'}</Form.Label>
 							<Form.Control
 								type="number"
 								{...register("height")}
@@ -162,7 +199,7 @@ const CreateProductForm = () => {
                         
 
                         <Form.Group controlId="price" className="mb-3">
-							<Form.Label>Price *</Form.Label>
+							<Form.Label>Price {'(SEK)'} *</Form.Label>
 							<Form.Control
 								type="number"
 								{...register("price", {
@@ -183,8 +220,23 @@ const CreateProductForm = () => {
 							{errors.quantity ? <div className="error-message">{errors.quantity.message}</div> : null}
 						</Form.Group>
 
+                        <Form.Group id="photo" className="mb-3">
+					   <Form.Label id="photo-label">Photo</Form.Label>
+					   <Form.Control
+						aria-labelledby="photo-label"
+						type="file"
+						onChange={handlePhotoChange}
+                        required
+					/>
+					<Form.Text>
+						{photo
+							? `${photo.name} (${Math.round(photo.size / 1024)} kB)`
+							: <p className="select-photo">No photo selected</p>}
+					</Form.Text>
+				</Form.Group>
 
-						<Button className="custom-button" type="submit">
+
+						<Button className="create-product-button" type="submit">
 							Submit
 						</Button>
 					</Form>
