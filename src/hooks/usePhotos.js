@@ -2,8 +2,8 @@ import { useFirestoreQueryData } from "@react-query-firebase/firestore";
 import { collection, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
-const usePhotos = (id) => {
-	const collectionRef = collection(db, "products_images");
+const usePhotos = (name) => {
+	const collectionRef = collection(db, "products_photos");
 
 	const queryRef = query(
 		collectionRef,

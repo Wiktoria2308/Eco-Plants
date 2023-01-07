@@ -1,22 +1,32 @@
 import ProductCard from "../components/ProductCard";
 import { useParams } from "react-router-dom";
 import useProduct from "../hooks/useProduct";
-import usePhotos from "../hooks/usePhotos";
 import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
+import { useState, useEffect } from "react";
 
 const ProductPage = () => {
     const { id } = useParams();
 	const { getProduct } = useProduct();
 	const { data } = getProduct(id);
-	const { data: photos } = usePhotos(id);
+   
+    const [usePhotoUrl, setPhotoUrl] = useState(null);
 
+    useEffect(() => {
+
+    if(data) {
+        setPhotoUrl(data.photoURL);
+    }
+
+    })
 
 return (
-    <>
-    <div class="plant-photo">
+    <div className="product-page">
+    <div className="product-card-container">
+    <div className="plant-photo">
         <img src={
-			photos && photos.length ? photos[0].url : PlaceholderPhoto
-		}
+	        usePhotoUrl ||
+            PlaceholderPhoto
+        }
         className="plant-photo"
 		alt="plant photo"
         >
@@ -24,7 +34,8 @@ return (
         </img>
     </div>
     <ProductCard data={data}/>
-    </>
+    </div>
+    </div>
 )
 
 };

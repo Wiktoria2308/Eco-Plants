@@ -23,6 +23,7 @@ body {
   width: 20%;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-left: 30px;
 }
 .navbar.active {
 background-color: $light-green;
@@ -80,6 +81,7 @@ color: $white;
 
 .categories-item.active, .categories-item:active{
 	background:none !important;
+	color:#212529;
 }
 
 

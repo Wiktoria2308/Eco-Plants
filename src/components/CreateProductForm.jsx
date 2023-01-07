@@ -5,11 +5,14 @@ import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from "react-toastify";
-import { useState } from "react";
-
+import { useRef, useState } from "react";
+import { storage } from "../firebase";
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 const CreateProductForm = () => {
     const [photo, setPhoto] = useState(false);
+    const plantPhoto = useRef();
+
 	const {
 		formState: { errors },
 		handleSubmit,
@@ -30,13 +33,25 @@ const CreateProductForm = () => {
 
 
 	const onCreate = async (data) => {
-	
-		await addDoc(collection(db, "products"), {
-			...data,
-		});
-        // Article number
+        if (photo) {
+			const fileRef = ref(
+				storage,
+				`products_photos/${data.name}/${photo.name}`
+			);
+            const uploadResult = await uploadBytes(fileRef, photo);
+
+			const photoURL = await getDownloadURL(uploadResult.ref);
+
+            await addDoc(collection(db, "products"), {
+                ...data,
+                photoURL: photoURL,
+            });
+            }
+		
+           
 
 		toast.success("Product added!");
+        plantPhoto.value = "No photo selected";
 		reset();
 	};
  
@@ -62,8 +77,9 @@ const CreateProductForm = () => {
 						<Form.Group controlId="description" className="mb-3">
 							<Form.Label>Description *</Form.Label>
 							<Form.Control
-								className="pb-5"
-								type="text"
+								type="textarea"
+                                as="textarea"
+                                rows={3}
 								{...register("description", {
 									required: "Please fill in the description.",
 								})}
@@ -231,7 +247,7 @@ const CreateProductForm = () => {
 					<Form.Text>
 						{photo
 							? `${photo.name} (${Math.round(photo.size / 1024)} kB)`
-							: <p className="select-photo">No photo selected</p>}
+							: <p className="select-photo" ref={plantPhoto}>No photo selected</p>}
 					</Form.Text>
 				</Form.Group>
 

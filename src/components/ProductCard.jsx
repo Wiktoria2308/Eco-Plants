@@ -1,17 +1,18 @@
-
+import { QuantityPicker } from 'react-qty-picker';
 
 const ProductCard = ({ data }) => {
 
 return (
-    <div class="product-card">
+    <div className="product-card">
   
-  <div class="description">
-    <h2>Classic Peace Lily</h2>
-    <h4>Popular House Plant</h4>
-    <h1>$18</h1>
-    <p>Classic Peace Lily is a spathiphyllum floor plant arranged in a bamboo planter with a blue & red ribbom and butterfly pick.</p>
-    <button>Add to Cart</button>
-    <button>Wishlist</button>
+  <div className="description">
+    <h2>{data.name}</h2>
+    <h4>{data.type}</h4>
+    <h1>{data.price} kr</h1>
+    <p>{data.description}</p>
+    <QuantityPicker/>
+    <button className='add-card-button'>Add to Cart</button>
+    {/* <button>Wishlist</button> */}
   </div>
 </div>
 

@@ -5,18 +5,17 @@ $dark-green: #4D774E;
 $very-dark-green: #164A41;
 $white: #FFFFFF;
 
+.product-card-container{
+  display:flex;
+  padding-top: 100px;
+}
+
 .product-card {
-    
-    width: 650px;
-    // height: 375px;
-    position: absolute;
-    background: white;
-    margin: 0 auto;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  flex-basis: 50%;
+
+    background-color: white;
+
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
-    transition: all 0.3s;
     
     &:hover {
       box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
@@ -26,9 +25,6 @@ $white: #FFFFFF;
     .description {
       
        padding: 30px;
-       float: left;
-       width: 55%;
-       border-left: 2px solid #efefef;
        
        h1 {
          color: #515151;
@@ -62,28 +58,25 @@ $white: #FFFFFF;
          margin: 0;
       }
       
-       button {
+      .add-card-button {
 
          outline: 0;
          border: 0;
-         background: none;
-         border: 1px solid #d9d9d9;
+         background: $orange-color;
          padding: 8px 0px;
-         margin-bottom: 30px;
-         color: #515151;
+         margin-bottom: 20px;
+         color: $white;
          text-transform: uppercase;
-         width: 125px;
+         width: 225px;
          font-family: inherit;
-         margin-right: 5px;
          transition: all 0.3s ease;
          font-weight: 500;
+         border-radius: 3px;
+         margin-left: 20px;
          
          &:hover {
-           
-           // background: darken(white, 2%);
-           border: 1px solid #aedaa6;
-           color: #aedaa6;
-           cursor: pointer;
+          
+           background-color:  #ef9a11;
            
          }
 
@@ -93,14 +86,10 @@ $white: #FFFFFF;
     
   }
   .plant-photo {
-      
-    padding: 30px;
-    width: 45%;
+    flex-basis: 50%;
     text-align: center;
-    float: left;
-    
     img { 
-      max-height: 240px; 
+      max-height: 540px; 
     }
     
   }
@@ -122,4 +111,16 @@ $white: #FFFFFF;
 }
 .create-product-button:hover{
   background-color: $very-dark-green;
+}
+
+.product-page {
+  background-color: $white;
+  min-height: 800px;
+  width: 100%;
+}
+.quantity-display{
+padding: 0 !important;
+}
+.quantity-modifier{
+  background: none !important;
 }
