@@ -47,11 +47,11 @@ $white: #FFFFFF;
          color: #727272;
          text-transform: uppercase;
          font-weight: 500;
-         font-size: 12px
+         font-size: 12px;
        }
       
-       p { 
-         font-size: 12px; 
+       .product-description { 
+         font-size: 14px; 
          line-height: 20px;
          color: #727272;
          padding: 20px 0;
@@ -123,4 +123,37 @@ padding: 0 !important;
 }
 .quantity-modifier{
   background: none !important;
+}
+.stock-status {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.stock-status-available {
+  color: #009544;
+}
+.stock-status-few {
+  color: #c27904;
+}
+.stock-status-out {
+  color: rgb(206, 0, 73);
+}
+.product-attribute {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 13px;
+  flex-basis: 50%;
+}
+.product-attribute p {
+  margin-bottom: 0;
+}
+.attribute-icon {
+  align-self: center;
+  margin-right: 10px;
+}
+.product-attribute-data{
+margin-left: 5px;
+}
+.product-attributes {
+margin-bottom: 30px;
+color: #727272;
 }

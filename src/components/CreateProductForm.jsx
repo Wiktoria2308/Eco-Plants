@@ -178,11 +178,11 @@ const CreateProductForm = () => {
 							{errors.height ? <div className="error-message">{errors.height.message}</div> : null}
 						</Form.Group> : null }
 
-                        { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="pot-size" className="mb-3">
+                        { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="pot_size" className="mb-3">
 							<Form.Label>Pot size {'(cm)'} *</Form.Label>
 							<Form.Control
 								type="number"
-								{...register("pot-size", {
+								{...register("pot_size", {
 									required: "Please enter the size of the pot.",
 								})}
 							/>
