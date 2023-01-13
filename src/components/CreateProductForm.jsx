@@ -114,7 +114,8 @@ const CreateProductForm = () => {
 								})}
 							>
 								<option></option>
-								<option value="Orchids">Orchids</option>
+								<option value="Orchid">Orchid</option>
+								<option value="Succulent">Succulent</option>
 								<option value="Cactus">Cactus</option>
 							</Form.Select>
 							{errors.type ? <div className="error-message">{errors.type.message}</div> : null}
@@ -129,8 +130,8 @@ const CreateProductForm = () => {
 								})}
 							>
 								<option></option>
-								<option value="Berry bushes">Berry bushes</option>
-								<option value="Ornamental shrubs">Ornamental shrubs</option>
+								<option value="Berry bush">Berry bush</option>
+								<option value="Ornamental shrub">Ornamental shrub</option>
 							</Form.Select>
 							{errors.type ? <div className="error-message">{errors.type.message}</div> : null}
 						</Form.Group> : null }
@@ -160,8 +161,8 @@ const CreateProductForm = () => {
 								})}
 							>
 								<option></option>
-								<option value="Pots">Pots</option>
-								<option value="Watering cans">Watering cans</option>
+								<option value="Pot">Pot</option>
+								<option value="Watering can">Watering can</option>
                                 <option value="Soil">Soil</option>
 							</Form.Select>
 							{errors.type ? <div className="error-message">{errors.type.message}</div> : null}

@@ -4,6 +4,7 @@ import useProduct from "../hooks/useProduct";
 import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { useState, useEffect } from "react";
 
+
 const ProductPage = () => {
     const { id } = useParams();
 	const { getProduct } = useProduct();
@@ -20,6 +21,7 @@ const ProductPage = () => {
     })
 
 return (
+    
     <div className="product-page">
     <div className="product-card-container">
     <div className="plant-photo">
@@ -36,6 +38,7 @@ return (
     <ProductCard data={data}/>
     </div>
     </div>
+
 )
 
 };
