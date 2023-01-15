@@ -23,13 +23,15 @@ const PlantsDropdown = () => {
         </Dropdown.Item>
         <Dropdown.Item
           as={NavLink}
-          to="/house-plants/cactus"
+          key="cactus"
+          to="/house-plants/cactuses"
           className="categories-item"
         >
           Cactus
         </Dropdown.Item>
         <Dropdown.Item
           as={NavLink}
+          key="succulent"
           to="/house-plants/succulents"
           className="categories-item"
         >

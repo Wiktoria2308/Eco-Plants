@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+
 import "./assets/scss/App.scss";
 import "./assets/scss/Products.scss";
 import Navigation from "./components/Navigation";
@@ -36,8 +37,19 @@ function App() {
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/logout" element={<LogoutPage />} />
 				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
-				<Route path="/products" element={<ProductsPage />} />
-				<Route path="/products/:id" element={<ProductPage />} />
+				{/* <Route path="/house-plants/:type" element={<ProductsPage />} />
+				<Route path="/garden-plants/:type" element={<ProductsPage />} />
+				<Route path="/seeds/:type" element={<ProductsPage />} />
+				<Route path="/accessories/:type" element={<ProductsPage />} /> */}
+				{/* <Route path="/house-plants/:type/:id" element={<ProductPage />} /> */}
+		
+				{["/house-plants/:type", "/garden-plants/:type","/seeds/:type","/accessories/:type"].map((path, index) => (
+                  <Route key={index} path={path} element={<ProductsPage />} />
+                ))}
+				{["/house-plants/:type/:id", "/garden-plants/:type/:id","/seeds/:type/:id","/accessories/:type/:id"].map((path, index) => (
+                  <Route key={index} path={path} element={<ProductPage />} />
+                ))}
+
 
 				{/* routes for logged in users */}
 				<Route
