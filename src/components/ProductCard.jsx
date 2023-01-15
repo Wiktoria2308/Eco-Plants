@@ -15,7 +15,7 @@ return (
   
   <div className="description">
     <h2>{data.name}</h2>
-    <h4>{data.type}</h4>
+    <h4>Type: {data.type}</h4>
     <h1>{data.price} kr</h1>
     <p className='product-description'>{data.description}</p>
     <div className='product-attributes'>

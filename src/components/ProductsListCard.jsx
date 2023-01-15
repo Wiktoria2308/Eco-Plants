@@ -1,11 +1,15 @@
 import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 // import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { MdHeight } from 'react-icons/md';
+import { useNavigate, Link, useLocation } from "react-router-dom";
+
 
 const ProductsListCard = ({ product }) => {
   const [usePhotoUrl, setPhotoUrl] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation()
 
   useEffect(() => {
     if (product) {
@@ -13,25 +17,33 @@ const ProductsListCard = ({ product }) => {
     }
   });
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate(`${location.pathname}/${product.id}`)
+  }
+
   return (
-    <>
-      <Card className="products-list-card col-12 col-md-4">
+
+  <Col style={{maxWidth: '300px'}}>
+      <Card className="products-list-card">
         <Card.Img
           variant="top"
           src={usePhotoUrl || PlaceholderPhoto}
           className="card-photo"
           alt="plant photo"
+          onClick={handleClick}
         />
-        <Card.Body className="card-body">
-          <Card.Title className="card-title">{product.name}</Card.Title>
-          <Card.Subtitle className="card-subtitle">  <MdHeight className='card-attribute-icon'/>{product.height} cm</Card.Subtitle>
+        <Card.Body >
+          <Card.Title onClick={handleClick}>{product.name}</Card.Title>
+          <Card.Subtitle>  <MdHeight className='card-height-icon'/><span className="product-height">{product.height} cm</span></Card.Subtitle>
           <Card.Text>
            {product.price} kr
           </Card.Text>
         </Card.Body>
-        <Card.Footer className="card-footer"></Card.Footer>
+        <Card.Footer> <button className='add-to-cart'>Add to Cart</button></Card.Footer>
       </Card>
-    </>
+      </Col>
+
   );
 };
 
