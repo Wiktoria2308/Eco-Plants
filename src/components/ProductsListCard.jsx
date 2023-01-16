@@ -3,13 +3,15 @@ import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { Card, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { MdHeight } from 'react-icons/md';
-import { useNavigate, Link, useLocation } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../reducers/shoppingCartReducer'
 
 const ProductsListCard = ({ product }) => {
   const [usePhotoUrl, setPhotoUrl] = useState(null);
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (product) {
@@ -20,6 +22,9 @@ const ProductsListCard = ({ product }) => {
   const handleClick = (e) => {
     e.preventDefault();
     navigate(`${location.pathname}/${product.id}`)
+  }
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
   }
 
   return (
@@ -40,7 +45,7 @@ const ProductsListCard = ({ product }) => {
            {product.price} kr
           </Card.Text>
         </Card.Body>
-        <Card.Footer> <button className='add-to-cart'>Add to Cart</button></Card.Footer>
+        <Card.Footer> <button className='add-to-cart' onClick={()=>{handleAddToCart(product)}}>Add to Cart</button></Card.Footer>
       </Card>
       </Col>
 

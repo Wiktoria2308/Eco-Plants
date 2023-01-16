@@ -8,6 +8,7 @@ import Title from "../assets/images/Eco-plants.png";
 import Avatar from "../assets/images/avatar.jpeg"
 import { useState, useEffect } from "react";
 import { SlArrowDown } from 'react-icons/sl';
+import {TiShoppingCart} from 'react-icons/ti';
 import PlantsDropdown from '../components/PlantsDropdown';
 
 const Navigation = () => {
@@ -125,6 +126,9 @@ const Navigation = () => {
 								</NavLink>
 							</NavDropdown>
 						)}
+							<NavLink to="/shopping-cart" className="shopping-cart-link">
+						   <TiShoppingCart className="shopping-cart-icon"/>
+						   </NavLink>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
