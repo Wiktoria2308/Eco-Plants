@@ -24,6 +24,12 @@ const ProductsListCard = ({ product }) => {
     navigate(`${location.pathname}/${product.id}`)
   }
   const handleAddToCart = (product) => {
+    if(product.shopQuantity){
+      product.shopQuantity += 1;
+    }
+    else {
+      product.shopQuantity = 1;
+    }
     dispatch(addToCart(product));
   }
 

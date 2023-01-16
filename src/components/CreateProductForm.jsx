@@ -221,6 +221,7 @@ const CreateProductForm = () => {
 								type="number"
 								{...register("price", {
 									required: "Please enter the price.",
+									valueAsNumber: true,
 								})}
 							/>
 							{errors.price ? <div className="error-message">{errors.price.message}</div> : null}
@@ -232,6 +233,7 @@ const CreateProductForm = () => {
 								type="number"
 								{...register("quantity", {
 									required: "Please enter the quantity of products.",
+									valueAsNumber: true,
 								})}
 							/>
 							{errors.quantity ? <div className="error-message">{errors.quantity.message}</div> : null}

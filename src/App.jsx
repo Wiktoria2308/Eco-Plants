@@ -20,7 +20,7 @@ import { ToastContainer } from "react-toastify";
 import { ReactQueryDevtools } from "react-query/devtools";
 import EditProductsPage from "./pages/EditProductsPage";
 import EditProductPage from "./pages/EditProductPage";
-import ShoppingCart from "./components/ShoppingCart";
+import ShoppingCartPage from "./pages/ShoppingCartPage";
 
 function App() {
 	return (
@@ -38,7 +38,7 @@ function App() {
 				<Route path="/login" element={<LoginPage />} />
 				<Route path="/logout" element={<LogoutPage />} />
 				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
-				<Route path="/shopping-cart" element={<ShoppingCart />} />
+				<Route path="/shopping-cart" element={<ShoppingCartPage />} />
 				{/* <Route path="/house-plants/:type" element={<ProductsPage />} />
 				<Route path="/garden-plants/:type" element={<ProductsPage />} />
 				<Route path="/seeds/:type" element={<ProductsPage />} />

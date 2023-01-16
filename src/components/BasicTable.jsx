@@ -31,7 +31,7 @@ const BasicTable = ({ columns, data }) => {
 					return (
 						<tr {...row.getRowProps()}>
 							{row.cells.map(cell => (
-								<td {...cell.getCellProps()}>
+								<td className="align-middle" {...cell.getCellProps()}>
 									{cell.render('Cell')}
 								</td>
 							))}
