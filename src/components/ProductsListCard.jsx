@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { MdHeight } from 'react-icons/md';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../reducers/shoppingCartReducer'
+import { addToCart} from '../reducers/shoppingCartReducer'
 
 const ProductsListCard = ({ product }) => {
   const [usePhotoUrl, setPhotoUrl] = useState(null);
@@ -23,14 +23,16 @@ const ProductsListCard = ({ product }) => {
     e.preventDefault();
     navigate(`${location.pathname}/${product.id}`)
   }
+
   const handleAddToCart = (product) => {
+    console.log(product)
     if(product.shopQuantity){
-      product.shopQuantity += 1;
+      dispatch(addToCart([product, 1])); 
     }
     else {
       product.shopQuantity = 1;
+      dispatch(addToCart([product, 0]));
     }
-    dispatch(addToCart(product));
   }
 
   return (

@@ -5,31 +5,18 @@ import { Image, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from 'react-redux'
 import { removeProduct } from '../reducers/shoppingCartReducer';
 import { QuantityPicker } from 'react-qty-picker';
-// import { useState, useEffect } from 'react';
+import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { changeQuantity } from '../reducers/shoppingCartReducer'
+import { ImBin } from 'react-icons/im';
 
 const ShoppingCart = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.shoppingCart.value)
 
-    // const [getValue, setValue] = useState();
-
-    // const getPickerValue = (value) =>{
-    //     setValue(value);
-    //     console.log("value",value)
-    // }
-
-    // useEffect(()=> {
-
-    // },[getValue])
-
     const addMoreProducts = (product, value) => {
     // sent two parameters to reducer product object and value to change
-    dispatch(changeQuantity([product, value]));
-          
+    dispatch(changeQuantity([product, value]));    
     }
-
-
 
     console.log(products);
 
@@ -42,7 +29,7 @@ const ShoppingCart = () => {
 					<Image
 						src={
 							tableProps.row.original.photoURL ||
-							"https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg"
+							<PlaceholderPhoto />
 						}
 						width={60}
 					/>
@@ -76,7 +63,7 @@ const ShoppingCart = () => {
 						size="sm"
 						onClick={() => dispatch( removeProduct(product) )}
 					>
-						Remove
+						<ImBin className="trash-bin" />
 					</Button>
 				)
 			},
@@ -85,7 +72,8 @@ const ShoppingCart = () => {
 
 	return (
 		<Container className="py-3 table-responsive">
-			{products && <BasicTable columns={columns} data={products} />}
+			{products.length !== 0 ? <BasicTable columns={columns} data={products} /> :null}
+            {products.length === 0 ? <p>Shopping Cart is empty!</p> :null}
 		</Container>
 	);
 

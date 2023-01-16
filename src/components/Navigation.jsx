@@ -10,10 +10,36 @@ import { useState, useEffect } from "react";
 import { SlArrowDown } from 'react-icons/sl';
 import {TiShoppingCart} from 'react-icons/ti';
 import PlantsDropdown from '../components/PlantsDropdown';
+import Badge from 'react-bootstrap/Badge';
+import { useSelector } from 'react-redux'
 
 const Navigation = () => {
 	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext();
 	const [navbar, setNavbar] = useState(false);
+	const products = useSelector(state => state.shoppingCart.value);
+	const [productsCart, setProductsCart] = useState(null);
+
+	const sumProducts = (products) => {
+	// const products = useSelector(state => state.shoppingCart.value)
+	if(products){
+		const initialValue = 0;
+		const result = products.map(function(product) {return product.shopQuantity;})
+		if(result){
+			result.reduce(
+				(accumulator, currentValue) => accumulator + currentValue,
+				initialValue
+			  );
+		}
+		
+		  setProductsCart(result);
+	}
+	}
+
+	useEffect(()=> {
+	sumProducts(products);
+	},[products])
+
+	
 	//navbar scroll changeBackground function
   const changeBackground = () => {
     if (window.scrollY >= 47) {
@@ -128,6 +154,7 @@ const Navigation = () => {
 						)}
 							<NavLink to="/shopping-cart" className="shopping-cart-link">
 						   <TiShoppingCart className="shopping-cart-icon"/>
+						   {productsCart ? <Badge className="shopping-cart-badge" pill>{productsCart}</Badge> :null}
 						   </NavLink>
 					</Nav>
 				</Navbar.Collapse>

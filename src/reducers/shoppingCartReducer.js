@@ -10,7 +10,13 @@ export const shoppingCartReducer = createSlice({
 	initialState,
 	reducers: {
 		addToCart: (state, action) => {
-			state.value.push(action.payload)
+            const product = state.value.find(product => product.id === action.payload[0].id)
+            if(product){
+            product.shopQuantity += action.payload[1]
+            }
+            else {
+            state.value.push(action.payload[0])
+            }
 			return state
 		},
 		removeProduct: (state, action) => {
@@ -18,7 +24,6 @@ export const shoppingCartReducer = createSlice({
 			return state
 		},
         changeQuantity: (state, action) => {
-            console.log(action.payload)
 			const product = state.value.find(product => product.id === action.payload[0].id)
 			product.shopQuantity = action.payload[1];
 			return state

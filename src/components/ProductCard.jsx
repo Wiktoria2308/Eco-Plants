@@ -16,14 +16,17 @@ const ProductCard = ({ data }) => {
     setValue(value);
 }
 
+
+
 const handleAddToCart = (product) => {
   if(product.shopQuantity){
-    product.shopQuantity += getValue;
+    dispatch(addToCart([product, getValue])); 
   }
   else {
     product.shopQuantity = getValue;
+    dispatch(addToCart([product, 0]));
   }
-  dispatch(addToCart(product));
+  
 }
 
 return (
