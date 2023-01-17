@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import "./assets/scss/App.scss";
 import "./assets/scss/Products.scss";
 import Navigation from "./components/Navigation";
@@ -55,7 +54,7 @@ function App() {
 
 				{/* routes for logged in users */}
 				<Route
-					path="/update-"
+					path="/update-profile"
 					element={
 						<RequireAuth>
 							<UpdateProfilePage />

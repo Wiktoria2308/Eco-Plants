@@ -1,5 +1,4 @@
 import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
-// import { Link } from "react-router-dom";
 import { Card, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { MdHeight } from 'react-icons/md';
@@ -25,7 +24,6 @@ const ProductsListCard = ({ product }) => {
   }
 
   const handleAddToCart = (product) => {
-    console.log(product)
     if(product.shopQuantity){
       dispatch(addToCart([product, 1])); 
     }

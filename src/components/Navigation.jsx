@@ -12,6 +12,7 @@ import {TiShoppingCart} from 'react-icons/ti';
 import PlantsDropdown from '../components/PlantsDropdown';
 import Badge from 'react-bootstrap/Badge';
 import { useSelector } from 'react-redux'
+import ShoppingCartNavigation from "./ShoppingCartNavigation";
 
 const Navigation = () => {
 	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext();
@@ -19,19 +20,17 @@ const Navigation = () => {
 	const products = useSelector(state => state.shoppingCart.value);
 	const [productsCart, setProductsCart] = useState(null);
 
+	const pathname = window.location.pathname;
+
 	const sumProducts = (products) => {
 	// const products = useSelector(state => state.shoppingCart.value)
 	if(products){
-		const initialValue = 0;
 		const result = products.map(function(product) {return product.shopQuantity;})
-		if(result){
-			result.reduce(
-				(accumulator, currentValue) => accumulator + currentValue,
-				initialValue
-			  );
-		}
 		
-		  setProductsCart(result);
+		if(result){
+			const sum = result.reduce((partialSum, a) => partialSum + a, 0);
+			setProductsCart(sum);
+		}
 	}
 	}
 
@@ -55,64 +54,33 @@ const Navigation = () => {
   })
 
 	return (
-		<Navbar variant="dark" expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
-			<Container className="justify-content-end ">
-				<Navbar.Brand as={Link} to="/" className="nav-brand col-9 col-md-6">
-					<img className="brand-title" src={Title} alt="brand-title" />
-				</Navbar.Brand>
+		<>
+		{ pathname !== "/shopping-cart" ? <Navbar expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
+		<Container className="justify-content-end ">
+			<Navbar.Brand as={Link} to="/" className="nav-brand col-9 col-md-6">
+				<img className="brand-title" src={Title} alt="brand-title" />
+			</Navbar.Brand>
 
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav" className="nav-links">
-					<Nav className="ms-auto align-items-end">
+			<Navbar.Toggle aria-controls="basic-navbar-nav" />
+			<Navbar.Collapse id="basic-navbar-nav" className="nav-links">
+				<Nav className="ms-auto align-items-end">
 
-					<PlantsDropdown />
+				<PlantsDropdown />
 
-					<Nav.Link className="nav-color accessories-link" as={NavLink} to="/accessories">
-							Accessories
-						</Nav.Link>
+				<Nav.Link className="nav-color accessories-link" as={NavLink} to="/accessories">
+						Accessories
+					</Nav.Link>
 
-						{!currentUser && !isAdmin && (
-							<>
-								<Nav.Link className="nav-color line-style line-style-link" as={NavLink} to="/login">
-									Login/Signup
-								</Nav.Link>
-							</>
-						)}
-						
-						{currentUser && !isAdmin && (
-							<>
-								<NavDropdown
-									className="nav-color line-style line-style-link profile-dropdown"
-									title={
-										<>
-											<Image
-												src={
-													userPhotoUrl ||
-													Avatar
-												}
-												className="image-avatar"
-												height={30}
-												width={30}
-												fluid
-												roundedCircle
-											/>{" "}
-											<span className="nav-color user-name">{userName}</span>
-											<SlArrowDown className="arrow-down"/>
-										</>
-									}
-								>
-									<NavLink to="/update-profile" className="dropdown-item">
-										Update Profile
-									</NavLink>
-									<NavDropdown.Divider />
-									<NavLink to="/logout" className="dropdown-item">
-										Log Out
-									</NavLink>
-								</NavDropdown>
-							</>
-						)}
-
-						{isAdmin && (
+					{!currentUser && !isAdmin && (
+						<>
+							<Nav.Link className="nav-color line-style line-style-link" as={NavLink} to="/login">
+								Login/Signup
+							</Nav.Link>
+						</>
+					)}
+					
+					{currentUser && !isAdmin && (
+						<>
 							<NavDropdown
 								className="nav-color line-style line-style-link profile-dropdown"
 								title={
@@ -133,33 +101,66 @@ const Navigation = () => {
 									</>
 								}
 							>
-								<NavLink to="/users" className="dropdown-item">
-									Users
-								</NavLink>
-								<NavDropdown.Divider />
-								<NavLink to="/edit_products" className="dropdown-item ">
-									Edit products
-								</NavLink>
-								<NavLink to="/create_product" className="dropdown-item">
-									Create product
-								</NavLink>
-								<NavDropdown.Divider />
 								<NavLink to="/update-profile" className="dropdown-item">
 									Update Profile
 								</NavLink>
+								<NavDropdown.Divider />
 								<NavLink to="/logout" className="dropdown-item">
 									Log Out
 								</NavLink>
 							</NavDropdown>
-						)}
-							<NavLink to="/shopping-cart" className="shopping-cart-link">
-						   <TiShoppingCart className="shopping-cart-icon"/>
-						   {productsCart ? <Badge className="shopping-cart-badge" pill>{productsCart}</Badge> :null}
-						   </NavLink>
-					</Nav>
-				</Navbar.Collapse>
-			</Container>
-		</Navbar>
+						</>
+					)}
+
+					{isAdmin && (
+						<NavDropdown
+							className="nav-color line-style line-style-link profile-dropdown"
+							title={
+								<>
+									<Image
+										src={
+											userPhotoUrl ||
+											Avatar
+										}
+										className="image-avatar"
+										height={30}
+										width={30}
+										fluid
+										roundedCircle
+									/>{" "}
+									<span className="nav-color user-name">{userName}</span>
+									<SlArrowDown className="arrow-down"/>
+								</>
+							}
+						>
+							<NavLink to="/users" className="dropdown-item">
+								Users
+							</NavLink>
+							<NavDropdown.Divider />
+							<NavLink to="/edit_products" className="dropdown-item ">
+								Edit products
+							</NavLink>
+							<NavLink to="/create_product" className="dropdown-item">
+								Create product
+							</NavLink>
+							<NavDropdown.Divider />
+							<NavLink to="/update-profile" className="dropdown-item">
+								Update Profile
+							</NavLink>
+							<NavLink to="/logout" className="dropdown-item">
+								Log Out
+							</NavLink>
+						</NavDropdown>
+					)}
+						<NavLink to="/shopping-cart" className="shopping-cart-link">
+					   <TiShoppingCart className="shopping-cart-icon"/>
+					   {productsCart ? <Badge className="shopping-cart-badge" pill>{productsCart}</Badge> :null}
+					   </NavLink>
+				</Nav>
+			</Navbar.Collapse>
+		</Container>
+	</Navbar> : <ShoppingCartNavigation />}
+	</>
 	);
 };
 

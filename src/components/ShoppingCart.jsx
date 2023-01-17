@@ -8,6 +8,7 @@ import { QuantityPicker } from 'react-qty-picker';
 import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { changeQuantity } from '../reducers/shoppingCartReducer'
 import { ImBin } from 'react-icons/im';
+import EmptyShopingCart from '../components/EmptyShopingCart'
 
 const ShoppingCart = () => {
     const dispatch = useDispatch();
@@ -17,8 +18,6 @@ const ShoppingCart = () => {
     // sent two parameters to reducer product object and value to change
     dispatch(changeQuantity([product, value]));    
     }
-
-    console.log(products);
 
     const columns = useMemo(() => {
 		return [
@@ -52,7 +51,8 @@ const ShoppingCart = () => {
 			},
             {
 				Header: "Total (SEK)",
-				Cell: ({ row }) => `${row.original.shopQuantity * row.original.price}`,
+				accessor: "total",
+				Cell: ({ row }) =>  `${row.original.shopQuantity * row.original.price}`,
                 
 			},
 			{
@@ -73,7 +73,7 @@ const ShoppingCart = () => {
 	return (
 		<Container className="py-3 table-responsive">
 			{products.length !== 0 ? <BasicTable columns={columns} data={products} /> :null}
-            {products.length === 0 ? <p>Shopping Cart is empty!</p> :null}
+            {products.length === 0 ? <EmptyShopingCart /> :null}
 		</Container>
 	);
 
