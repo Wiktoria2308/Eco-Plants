@@ -23,10 +23,8 @@ const Navigation = () => {
 	const pathname = window.location.pathname;
 
 	const sumProducts = (products) => {
-	// const products = useSelector(state => state.shoppingCart.value)
 	if(products){
 		const result = products.map(function(product) {return product.shopQuantity;})
-		
 		if(result){
 			const sum = result.reduce((partialSum, a) => partialSum + a, 0);
 			setProductsCart(sum);
@@ -55,7 +53,7 @@ const Navigation = () => {
 
 	return (
 		<>
-		{ pathname !== "/shopping-cart" ? <Navbar expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
+		{ pathname !== "/shopping-cart" &&  pathname !== "/checkout" ? <Navbar expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
 		<Container className="justify-content-end ">
 			<Navbar.Brand as={Link} to="/" className="nav-brand col-9 col-md-6">
 				<img className="brand-title" src={Title} alt="brand-title" />
@@ -159,7 +157,8 @@ const Navigation = () => {
 				</Nav>
 			</Navbar.Collapse>
 		</Container>
-	</Navbar> : <ShoppingCartNavigation />}
+	</Navbar> :  <ShoppingCartNavigation /> }
+	
 	</>
 	);
 };

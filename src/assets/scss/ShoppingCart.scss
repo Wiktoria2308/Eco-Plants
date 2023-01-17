@@ -1,0 +1,115 @@
+$orange-color: #F1B24A;
+$light-green: #9DC88D;
+$dark-green: #4D774E;
+$very-dark-green: #164A41;
+$white: #FFFFFF;
+
+
+.shopping-cart-page-container{
+    .quantity-display{
+      padding: 0 !important;
+      font-size: 1.2rem !important;
+      }
+      .table {
+        background-color: white;
+      }
+      .remove-product-button {
+        background-color: transparent !important;
+        border: 0;
+      }
+      .trash-bin {
+        color:black;
+        font-size: 20px;
+      }
+      // hide Remove header 
+      th[role="columnheader"]:last-child {
+        visibility: hidden;
+      }
+  }
+
+  .shopping-cart-link {
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    position: relative;
+    white-space: nowrap;
+    color: #FFFFFF;
+  
+    &:hover {
+      color: #ffeac5;
+      
+    }
+  }
+
+  .shopping-cart-badge{
+    background-color: $orange-color !important;
+    color:$dark-green;
+    font-size: 13px;
+    position: relative;
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .empty-cart-container{
+    background-color: $white;
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+    margin-top: 50px;
+    padding-bottom: 100px;
+      .empty-cart-h1{
+        margin-bottom: 20px;
+        font-weight: 800;
+      }
+     .continue-shop{
+      color: #515151;
+     }
+  }
+  .order-shopping-cart-container{
+    width: 400px;
+    padding: 30px;
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    float:right;
+
+    .order-shopping-cart-total{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        p{
+            font-size: 20px;
+            font-weight: 800;
+        }
+    }
+    .order-shopping-cart-order{
+        display: flex;
+        margin-bottom: 30px;
+
+        h5{
+            margin-left: 8px;
+        }
+        .order-icon{
+         position: relative;
+         top: 3px;
+         font-size: 18px;
+        }
+    }
+
+    button{
+          outline: 0;
+          border: 0;
+          background: #efae45;
+          padding: 8px 5px;
+          color: $white;
+          text-transform: uppercase;
+          width: 100%;
+          font-family: inherit;
+          transition: all 0.3s ease;
+          font-weight: 500;
+          border-radius: 3px;
+          font-size: 20px;
+          cursor: pointer;
+    }
+
+  }

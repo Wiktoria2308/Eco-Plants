@@ -9,18 +9,38 @@ import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { changeQuantity } from '../reducers/shoppingCartReducer'
 import { ImBin } from 'react-icons/im';
 import EmptyShopingCart from '../components/EmptyShopingCart'
-// import {useState} from "react";
+import { useEffect} from "react";
+import { changeTotal } from '../reducers/totalPrice'
+import OrderShoppingCart from '../components/OrderShoppingCart'
 
 const ShoppingCart = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.shoppingCart.value)
+	const total = useSelector(state => state.total.balance)
 
-	console.log(products)
+	// console.log(total)
+	// console.log(products)
 
     const addMoreProducts = (product, value) => {
     // sent two parameters to reducer product object and value to change
     dispatch(changeQuantity([product, value]));    
     }
+
+	const changeTotalPrice = (products) => {
+		if(products){
+			const result = products.map(function(product) {return product.total;})
+			
+			if(result){
+				const sum = result.reduce((partialSum, a) => partialSum + a, 0);
+				dispatch(changeTotal(sum));
+			}
+		}
+		}
+	
+		useEffect(()=> {
+	    changeTotalPrice(products);
+		},[products])
+
 
     const columns = useMemo(() => {
 		return [
@@ -55,17 +75,14 @@ const ShoppingCart = () => {
             {
 				Header: "Total (SEK)",
 				accessor: "total",
-				// Cell: ({ row }) => `${row.original.shopQuantity * row.original.price}`,
-				
-				Footer: info => {
-					// Only calculate total visits if rows change
-					const total = useMemo(
-					  () =>
-						info.rows.reduce((sum, row) => row.values.total + sum, 0),
-					  [info.rows]
-					)
-					return <>Total: {total}</>
-				  },
+				// Footer: info => {
+				// 	const total = useMemo(
+				// 	  () =>
+				// 		info.rows.reduce((sum, row) => row.values.total + sum, 0),
+				// 	  [info.rows]
+				// 	)
+				// 	return <>Total: {total}</>
+				//   },
 			},
 			{
 				Header: "Remove",
@@ -86,6 +103,7 @@ const ShoppingCart = () => {
 		<Container className="py-3 table-responsive">
 			{products.length !== 0 ? <BasicTable columns={columns} data={products} /> :null}
             {products.length === 0 ? <EmptyShopingCart /> :null}
+			{products.length !== 0 ? <OrderShoppingCart total={total} />:null}
 		</Container>
 	);
 

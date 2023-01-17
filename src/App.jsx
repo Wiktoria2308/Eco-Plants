@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./assets/scss/App.scss";
 import "./assets/scss/Products.scss";
+import "./assets/scss/ShoppingCart.scss";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFoundPage";
@@ -20,6 +21,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import EditProductsPage from "./pages/EditProductsPage";
 import EditProductPage from "./pages/EditProductPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
+import CheckoutPage from './pages/CheckoutPage'
 
 function App() {
 	return (
@@ -38,6 +40,7 @@ function App() {
 				<Route path="/logout" element={<LogoutPage />} />
 				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
 				<Route path="/shopping-cart" element={<ShoppingCartPage />} />
+				<Route path="/checkout" element={<CheckoutPage />} />
 				{/* <Route path="/house-plants/:type" element={<ProductsPage />} />
 				<Route path="/garden-plants/:type" element={<ProductsPage />} />
 				<Route path="/seeds/:type" element={<ProductsPage />} />

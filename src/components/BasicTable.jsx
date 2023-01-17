@@ -8,7 +8,7 @@ const BasicTable = ({ columns, data }) => {
 		getTableBodyProps,
 		headerGroups,
 		rows,
-		footerGroups,
+		// footerGroups,
 		prepareRow,
 	} = useTable({ columns, data })
 
@@ -40,7 +40,7 @@ const BasicTable = ({ columns, data }) => {
 					)
 				})}
 			</tbody>
-			<tfoot>
+			{/* <tfoot>
         {footerGroups.map(group => (
           <tr {...group.getFooterGroupProps()}>
             {group.headers.map(column => (
@@ -48,7 +48,7 @@ const BasicTable = ({ columns, data }) => {
             ))}
           </tr>
         ))}
-      </tfoot>
+      </tfoot> */}
 		</Table>
 	)
 }
