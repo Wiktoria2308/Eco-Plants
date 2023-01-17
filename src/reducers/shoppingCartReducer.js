@@ -17,6 +17,8 @@ export const shoppingCartReducer = createSlice({
             else {
             state.value.push(action.payload[0])
             }
+			// sum total price for each product in cart and add total attribute to each product
+			state.value.forEach(product => product.total = product.shopQuantity * product.price);
 			return state
 		},
 		removeProduct: (state, action) => {
@@ -26,6 +28,8 @@ export const shoppingCartReducer = createSlice({
         changeQuantity: (state, action) => {
 			const product = state.value.find(product => product.id === action.payload[0].id)
 			product.shopQuantity = action.payload[1];
+			// sum total price for each product in cart and add total attribute to each product
+			state.value.forEach(product => product.total = product.shopQuantity * product.price);
 			return state
 		},
 	}

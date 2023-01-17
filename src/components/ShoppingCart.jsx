@@ -9,10 +9,13 @@ import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { changeQuantity } from '../reducers/shoppingCartReducer'
 import { ImBin } from 'react-icons/im';
 import EmptyShopingCart from '../components/EmptyShopingCart'
+// import {useState} from "react";
 
 const ShoppingCart = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.shoppingCart.value)
+
+	console.log(products)
 
     const addMoreProducts = (product, value) => {
     // sent two parameters to reducer product object and value to change
@@ -42,7 +45,7 @@ const ShoppingCart = () => {
 				Header: "Quantity",
 				accessor: "shopQuantity",
                 Cell: ({ row: { original: product } }) => (
-                    <QuantityPicker onChange={(value) => {addMoreProducts(product, value)}} value={product.shopQuantity} min={1} max={product.quantity}/>
+                    <QuantityPicker onChange={(value) => addMoreProducts(product, value)} value={product.shopQuantity} min={1} max={product.quantity}/>
                 )
 			},
             {
@@ -52,8 +55,17 @@ const ShoppingCart = () => {
             {
 				Header: "Total (SEK)",
 				accessor: "total",
-				Cell: ({ row }) =>  `${row.original.shopQuantity * row.original.price}`,
-                
+				// Cell: ({ row }) => `${row.original.shopQuantity * row.original.price}`,
+				
+				Footer: info => {
+					// Only calculate total visits if rows change
+					const total = useMemo(
+					  () =>
+						info.rows.reduce((sum, row) => row.values.total + sum, 0),
+					  [info.rows]
+					)
+					return <>Total: {total}</>
+				  },
 			},
 			{
 				Header: "Remove",
