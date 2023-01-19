@@ -12,43 +12,39 @@ const getStripe = () => {
   return stripePromise;
 };
 
-const OrderShoppingCart = ({products, total }) => {
+const OrderShoppingCart = ({ products, total }) => {
+  const [stripeError, setStripeError] = useState(null);
+  const [isLoading, setLoading] = useState(false);
 
-    const [stripeError, setStripeError] = useState(null);
-    const [isLoading, setLoading] = useState(false);
+  const checkoutData = products.map(item => (
 
-    
-    // const checkoutData = products.map(item => (
-       
-    //     { 
-    //         price: item.price, 
-    //         quantity: item.shopQuantity,
-    //     }
-    // ));
-    const item = {
-        price: "price_1MRaqjA3TxH9CAPzVwmcx4KE",
-        quantity: 1
-      };
-    const checkoutOptions = {
-        lineItems: [item],
-        mode: "payment",
-        successUrl: `${window.location.origin}/success`,
-        cancelUrl: `${window.location.origin}/cancel`
-      };
-    // console.log(checkoutData)
+      {
+        price: item.price_id,
+        quantity: item.shopQuantity,
+        
+      }
+  ));
+ 
+  const checkoutOptions = {
+    lineItems: checkoutData,
+    mode: "payment",
+    successUrl: `${window.location.origin}/success`,
+    cancelUrl: `${window.location.origin}/cancel`,
+  };
 
-    const redirectToCheckout = async () => {
-        setLoading(true);
-        console.log("redirectToCheckout");
-    
-        const stripe = await getStripe();
-        const { error } = await stripe.redirectToCheckout(checkoutOptions);
-        console.log("Stripe checkout error", error);
-    
-        if (error) setStripeError(error.message);
-        setLoading(false);
-      };
-      if (stripeError) alert(stripeError);
+
+  const redirectToCheckout = async () => {
+    setLoading(true);
+    console.log("redirectToCheckout");
+
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout(checkoutOptions);
+    console.log("Stripe checkout error", error);
+
+    if (error) setStripeError(error.message);
+    setLoading(false);
+  };
+  if (stripeError) alert(stripeError);
 
   return (
     <div className="order-shopping-cart-container">
@@ -56,14 +52,22 @@ const OrderShoppingCart = ({products, total }) => {
         <BsCardChecklist className="order-icon" />
         <h5>My order</h5>
       </div>
+      <div className="order-shopping-cart-shipping">
+        <p>Shipping:</p>
+        <p>Free</p>
+      </div>
       <div className="order-shopping-cart-total">
         <p>Total:</p>
         <p>{total} kr</p>
       </div>
-      <button className='go-to-checkout-button' onClick={redirectToCheckout}
-        disabled={isLoading}>
-       {isLoading ? "Loading..." : "Checkout"}
-</button>
+    
+      <button
+        className="go-to-checkout-button"
+        onClick={redirectToCheckout}
+        disabled={isLoading}
+      >
+        {isLoading ? "Loading..." : "Checkout"}
+      </button>
     </div>
   );
 };
