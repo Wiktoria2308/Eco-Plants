@@ -14,10 +14,12 @@ import Badge from 'react-bootstrap/Badge';
 import { useSelector } from 'react-redux'
 import ShoppingCartNavigation from "./ShoppingCartNavigation";
 
+
 const Navigation = () => {
 	const { currentUser, userName, userPhotoUrl, isAdmin } = useAuthContext();
 	const [navbar, setNavbar] = useState(false);
 	const products = useSelector(state => state.shoppingCart.value);
+
 	const [productsCart, setProductsCart] = useState(null);
 
 	const pathname = window.location.pathname;

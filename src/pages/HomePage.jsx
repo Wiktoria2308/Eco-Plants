@@ -1,13 +1,10 @@
-// import { Link } from "react-router-dom";
+
 import Carousel from '../components/CarouselPlants'
 
 
 const HomePage = () => {
   return (
     <div className="homepage">
-      {/* <Link to={"/products"}>
-				Discover our plants
-			</Link> */}
       <div className="home-header-container">
         <div className="home-heading-container">
           <h1>Find your favourite plant</h1>

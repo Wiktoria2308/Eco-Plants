@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+
 const initialState = {
 	value: [],
 }
@@ -18,6 +19,7 @@ export const shoppingCartReducer = createSlice({
             }
 			// sum total price for each product in cart and add total attribute to each product
 			state.value.forEach(product => product.total = product.shopQuantity * product.price);
+			
 			return state
 		},
 		removeProduct: (state, action) => {

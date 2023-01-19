@@ -10,6 +10,7 @@ import {
 	Image,
 } from "react-bootstrap";
 import { useAuthContext } from "../contexts/AuthContext";
+import { Placeholder } from "../assets/images/Placeholder-user.png";
 
 const UpdateProfilePage = () => {
 	const displayNameRef = useRef();
@@ -87,7 +88,7 @@ const UpdateProfilePage = () => {
 									<Image
 										src={
 											currentUser.photoURL ||
-											"https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg"
+											Placeholder
 										}
 										fluid
 										roundedCircle

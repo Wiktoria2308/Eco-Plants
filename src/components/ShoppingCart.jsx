@@ -18,9 +18,6 @@ const ShoppingCart = () => {
     const products = useSelector(state => state.shoppingCart.value)
 	const total = useSelector(state => state.total.balance)
 
-	// console.log(total)
-	// console.log(products)
-
     const addMoreProducts = (product, value) => {
     // sent two parameters to reducer product object and value to change
     dispatch(changeQuantity([product, value]));    
@@ -75,14 +72,6 @@ const ShoppingCart = () => {
             {
 				Header: "Total (SEK)",
 				accessor: "total",
-				// Footer: info => {
-				// 	const total = useMemo(
-				// 	  () =>
-				// 		info.rows.reduce((sum, row) => row.values.total + sum, 0),
-				// 	  [info.rows]
-				// 	)
-				// 	return <>Total: {total}</>
-				//   },
 			},
 			{
 				Header: "Remove",

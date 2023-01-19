@@ -1,5 +1,4 @@
 import { QuantityPicker } from 'react-qty-picker';
-// import { GiWateringCan } from 'react-icons/gi';
 import { MdHeight } from 'react-icons/md';
 import { TbCircleHalfVertical } from 'react-icons/tb';
 import { TiWeatherPartlySunny } from 'react-icons/ti';

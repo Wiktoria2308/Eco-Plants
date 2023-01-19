@@ -4,6 +4,7 @@ import SortableTable from "../components/SortableTable";
 import useUsers from "../hooks/useUsers";
 import { Image, Button } from "react-bootstrap";
 import useMakeAdmin from "../hooks/useMakeAdmin";
+import Placeholder from '../assets/images/Placeholder-user.png'
 
 const UsersPage = () => {
 	const { data } = useUsers();
@@ -28,7 +29,7 @@ const UsersPage = () => {
 					<Image
 						src={
 							tableProps.row.original.photoURL ||
-							"https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-scaled.jpeg"
+							Placeholder
 						}
 						width={60}
 						roundedCircle

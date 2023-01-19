@@ -17,14 +17,12 @@ const useProducts = () => {
 
 
          useEffect(() => {
-            // get reference to collection
             const colRef = collection(db, "products")
             const fixType = type.charAt(0).toUpperCase() + type.slice(1);
             const queryRef = query(colRef, where("type", "==", fixType))
     
-            // subscribe to changes in collection
+       
             const unsubscribe = onSnapshot(queryRef, (snapshot) => {
-                // got me a new snapshot 🤳🏻
                 const docs = snapshot.docs.map(doc => {
                     return {
                         id: doc.id,

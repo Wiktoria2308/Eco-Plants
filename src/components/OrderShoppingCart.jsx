@@ -8,11 +8,10 @@ const getStripe = () => {
   if (!stripePromise) {
     stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
   }
-
   return stripePromise;
-};
+}
 
-const OrderShoppingCart = ({ products, total }) => {
+const OrderShoppingCart = ({products, total }) => {
   const [stripeError, setStripeError] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -28,23 +27,25 @@ const OrderShoppingCart = ({ products, total }) => {
   const checkoutOptions = {
     lineItems: checkoutData,
     mode: "payment",
-    successUrl: `${window.location.origin}/success`,
+    successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancelUrl: `${window.location.origin}/cancel`,
   };
 
 
   const redirectToCheckout = async () => {
     setLoading(true);
-    console.log("redirectToCheckout");
 
     const stripe = await getStripe();
     const { error } = await stripe.redirectToCheckout(checkoutOptions);
+    
     console.log("Stripe checkout error", error);
 
     if (error) setStripeError(error.message);
     setLoading(false);
   };
   if (stripeError) alert(stripeError);
+
+
 
   return (
     <div className="order-shopping-cart-container">
@@ -68,6 +69,7 @@ const OrderShoppingCart = ({ products, total }) => {
       >
         {isLoading ? "Loading..." : "Checkout"}
       </button>
+
     </div>
   );
 };

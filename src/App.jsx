@@ -21,7 +21,6 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import EditProductsPage from "./pages/EditProductsPage";
 import EditProductPage from "./pages/EditProductPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
-import CheckoutPage from './pages/CheckoutPage'
 import SuccessPage from "./pages/SuccessPage";
 import CancelPage from "./pages/CancelPage";
 
@@ -40,7 +39,6 @@ function App() {
 				<Route path="/logout" element={<LogoutPage />} />
 				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
 				<Route path="/shopping-cart" element={<ShoppingCartPage />} />
-				<Route path="/checkout" element={<CheckoutPage />} />
 				<Route path="/success" element={<SuccessPage />} />
 				<Route path="/cancel" element={<CancelPage />} />
 
