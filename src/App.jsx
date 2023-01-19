@@ -22,6 +22,8 @@ import EditProductsPage from "./pages/EditProductsPage";
 import EditProductPage from "./pages/EditProductPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 import CheckoutPage from './pages/CheckoutPage'
+import SuccessPage from "./pages/SuccessPage";
+import CancelPage from "./pages/CancelPage";
 
 function App() {
 	return (
@@ -32,8 +34,6 @@ function App() {
 				<Route path="/" element={<HomePage />} />
 				<Route path="*" element={<NotFound />} />
 
-				
-
 				{/* opened routes */}
 				<Route path="/signup" element={<SignupPage />} />
 				<Route path="/login" element={<LoginPage />} />
@@ -41,12 +41,10 @@ function App() {
 				<Route path="/forgot-password" element={<ForgotPasswordPage />} />
 				<Route path="/shopping-cart" element={<ShoppingCartPage />} />
 				<Route path="/checkout" element={<CheckoutPage />} />
-				{/* <Route path="/house-plants/:type" element={<ProductsPage />} />
-				<Route path="/garden-plants/:type" element={<ProductsPage />} />
-				<Route path="/seeds/:type" element={<ProductsPage />} />
-				<Route path="/accessories/:type" element={<ProductsPage />} /> */}
-				{/* <Route path="/house-plants/:type/:id" element={<ProductPage />} /> */}
-		
+				<Route path="/success" element={<SuccessPage />} />
+				<Route path="/cancel" element={<CancelPage />} />
+
+
 				{["/house-plants/:type", "/garden-plants/:type","/seeds/:type","/accessories/:type"].map((path, index) => (
                   <Route key={index} path={path} element={<ProductsPage />} />
                 ))}

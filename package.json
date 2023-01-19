@@ -13,7 +13,9 @@
   "dependencies": {
     "@react-query-firebase/firestore": "^1.0.0-dev.7",
     "@reduxjs/toolkit": "^1.9.1",
+    "@stripe/stripe-js": "^1.46.0",
     "bootstrap": "^5.2.3",
+    "express": "^4.18.2",
     "firebase": "^9.15.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
@@ -29,6 +31,7 @@
     "react-table": "^7.8.0",
     "react-toastify": "^9.1.1",
     "sass": "^1.57.1",
+    "stripe": "^11.6.0",
     "use-react-router-breadcrumbs": "^4.0.1",
     "uuid": "^9.0.0"
   },

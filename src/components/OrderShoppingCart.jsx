@@ -1,26 +1,70 @@
-import { useNavigate} from "react-router-dom";
-import {BsCardChecklist}  from 'react-icons/bs';
+import { BsCardChecklist } from "react-icons/bs";
+import { loadStripe } from "@stripe/stripe-js";
+import { useState } from "react";
 
-const OrderShoppingCart = ({total}) => {
-    const navigate = useNavigate();
+let stripePromise;
 
-    const handleCheckout = (e) => {
-        e.preventDefault();
-        navigate('/checkout');
-      }
+const getStripe = () => {
+  if (!stripePromise) {
+    stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
+  }
 
-return(
+  return stripePromise;
+};
+
+const OrderShoppingCart = ({products, total }) => {
+
+    const [stripeError, setStripeError] = useState(null);
+    const [isLoading, setLoading] = useState(false);
+
+    
+    // const checkoutData = products.map(item => (
+       
+    //     { 
+    //         price: item.price, 
+    //         quantity: item.shopQuantity,
+    //     }
+    // ));
+    const item = {
+        price: "price_1MRaqjA3TxH9CAPzVwmcx4KE",
+        quantity: 1
+      };
+    const checkoutOptions = {
+        lineItems: [item],
+        mode: "payment",
+        successUrl: `${window.location.origin}/success`,
+        cancelUrl: `${window.location.origin}/cancel`
+      };
+    // console.log(checkoutData)
+
+    const redirectToCheckout = async () => {
+        setLoading(true);
+        console.log("redirectToCheckout");
+    
+        const stripe = await getStripe();
+        const { error } = await stripe.redirectToCheckout(checkoutOptions);
+        console.log("Stripe checkout error", error);
+    
+        if (error) setStripeError(error.message);
+        setLoading(false);
+      };
+      if (stripeError) alert(stripeError);
+
+  return (
     <div className="order-shopping-cart-container">
-        <div className="order-shopping-cart-order">
-        <BsCardChecklist className="order-icon"/>
+      <div className="order-shopping-cart-order">
+        <BsCardChecklist className="order-icon" />
         <h5>My order</h5>
-        </div>
-        <div className="order-shopping-cart-total">
-            <p>Total:</p>
-            <p>{total} kr</p>
-        </div>
-       <button onClick={handleCheckout}>Checkout</button> 
+      </div>
+      <div className="order-shopping-cart-total">
+        <p>Total:</p>
+        <p>{total} kr</p>
+      </div>
+      <button className='go-to-checkout-button' onClick={redirectToCheckout}
+        disabled={isLoading}>
+       {isLoading ? "Loading..." : "Checkout"}
+</button>
     </div>
-)
-}
+  );
+};
 export default OrderShoppingCart;
