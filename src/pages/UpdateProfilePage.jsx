@@ -10,7 +10,7 @@ import {
 	Image,
 } from "react-bootstrap";
 import { useAuthContext } from "../contexts/AuthContext";
-import { Placeholder } from "../assets/images/Placeholder-user.png";
+import Placeholder from "../assets/images/Placeholder-user.png";
 
 const UpdateProfilePage = () => {
 	const displayNameRef = useRef();

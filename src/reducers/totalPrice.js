@@ -13,9 +13,13 @@ export const totalPriceReducer = createSlice({
 			state.balance = action.payload
 			return state
 		},
+		resetStateTotal: (state) => {
+			state.balance = initialState.balance;
+			return state
+		}
 	},
 })
 
-export const { changeTotal } = totalPriceReducer.actions
+export const { changeTotal, resetStateTotal } = totalPriceReducer.actions
 
 export default totalPriceReducer.reducer

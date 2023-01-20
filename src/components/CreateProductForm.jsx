@@ -98,7 +98,7 @@ const CreateProductForm = () => {
 							>
 								<option></option>
 								<option value="Houseplants">Houseplants</option>
-								<option value="Outdoor plants">Outdoor plants</option>
+								<option value="Garden plants">Garden plants</option>
 								<option value="Seeds">Seeds</option>
 								<option value="Accessories">Accessories</option>
 							</Form.Select>
@@ -121,7 +121,7 @@ const CreateProductForm = () => {
 							{errors.type ? <div className="error-message">{errors.type.message}</div> : null}
 						</Form.Group> : null }
 
-                        { watchAllFields.category === "Outdoor plants" ? <Form.Group controlId="type" className="mb-3">
+                        { watchAllFields.category === "Garden plants" ? <Form.Group controlId="type" className="mb-3">
 							<Form.Label>Type *</Form.Label>
 							<Form.Select
 								className=""
@@ -168,7 +168,7 @@ const CreateProductForm = () => {
 							{errors.type ? <div className="error-message">{errors.type.message}</div> : null}
 						</Form.Group> : null }
 
-                        { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="height" className="mb-3">
+                        { watchAllFields.category === "Garden plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="height" className="mb-3">
 							<Form.Label>Height {'(cm)'} *</Form.Label>
 							<Form.Control
 								type="number"
@@ -179,7 +179,7 @@ const CreateProductForm = () => {
 							{errors.height ? <div className="error-message">{errors.height.message}</div> : null}
 						</Form.Group> : null }
 
-                        { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="pot_size" className="mb-3">
+                        { watchAllFields.category === "Garden plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="pot_size" className="mb-3">
 							<Form.Label>Pot size {'(cm)'} *</Form.Label>
 							<Form.Control
 								type="number"
@@ -190,7 +190,7 @@ const CreateProductForm = () => {
 							{errors.height ? <div className="error-message">{errors.height.message}</div> : null}
 						</Form.Group> : null }
 
-                        { watchAllFields.category === "Outdoor plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="location" className="mb-3">
+                        { watchAllFields.category === "Garden plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="location" className="mb-3">
 							<Form.Label>Location *</Form.Label>
                             <Form.Select
 								className=""

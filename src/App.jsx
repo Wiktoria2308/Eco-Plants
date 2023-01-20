@@ -23,6 +23,11 @@ import EditProductPage from "./pages/EditProductPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 import SuccessPage from "./pages/SuccessPage";
 import CancelPage from "./pages/CancelPage";
+import HousePlantsPage from "./pages/HousePlantsPage";
+import GardenPlantsPage from "./pages/GardenPlantsPage";
+import SeedsPage from "./pages/SeedsPage";
+import AccessoriesPage from "./pages/AccessoriesPage";
+
 
 function App() {
 	return (
@@ -42,13 +47,17 @@ function App() {
 				<Route path="/success" element={<SuccessPage />} />
 				<Route path="/cancel" element={<CancelPage />} />
 
-
 				{["/house-plants/:type", "/garden-plants/:type","/seeds/:type","/accessories/:type"].map((path, index) => (
                   <Route key={index} path={path} element={<ProductsPage />} />
                 ))}
 				{["/house-plants/:type/:id", "/garden-plants/:type/:id","/seeds/:type/:id","/accessories/:type/:id"].map((path, index) => (
                   <Route key={index} path={path} element={<ProductPage />} />
                 ))}
+
+                <Route path="/house-plants" element={<HousePlantsPage />} />
+				<Route path="/garden-plants" element={<GardenPlantsPage />} />
+				<Route path="/seeds" element={<SeedsPage />} />
+				<Route path="/accessories" element={<AccessoriesPage />} />
 
 
 				{/* routes for logged in users */}

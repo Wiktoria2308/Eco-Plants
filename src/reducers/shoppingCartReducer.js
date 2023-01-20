@@ -33,12 +33,16 @@ export const shoppingCartReducer = createSlice({
 			state.value.forEach(product => product.total = product.shopQuantity * product.price);
 			return state
 		},
+		resetStateCart: (state) => {
+			state.value = initialState.value;
+			return state
+		}
 	},
 })
 
 
 // Action creators are generated for each reducer function
-export const { addToCart, removeProduct, changeQuantity} = shoppingCartReducer.actions
+export const { addToCart, removeProduct, changeQuantity, resetStateCart} = shoppingCartReducer.actions
 
 
 // Export the reducer
