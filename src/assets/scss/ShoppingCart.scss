@@ -117,6 +117,9 @@ $white: #FFFFFF;
           border-radius: 3px;
           font-size: 20px;
           cursor: pointer;
+          &:hover {
+            background-color:  #f09400;
+          }
     }
 
   }
@@ -163,4 +166,49 @@ $white: #FFFFFF;
     .continue-shop{
       color: #515151;
      }
+  }
+
+  .guest-address-form{
+    width: max-content;
+    margin: auto;
+    padding: 50px;
+
+    .error-message {
+      color:rgb(206, 0, 73);
+    }
+
+    .card-title {
+      margin-bottom: 1px !important;
+    }
+    .only-sweden{
+      font-size: 12px;
+    }
+    .go-to-payment-button{
+      margin-top: 20px;
+      outline: 0;
+      border: 0;
+      background: #efae45;
+      padding: 8px 5px;
+      color: $white;
+      text-transform: uppercase;
+      width: 100%;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border-radius: 3px;
+      font-size: 20px;
+      cursor: pointer;
+      &:hover {
+        background-color:  #f09400;
+      }
+    }
+    form{
+      margin-top: 20px;
+      input {
+        width: 400px;
+      }
+      .PhoneInputInput{
+        width: 100%;
+      }
+    }
   }

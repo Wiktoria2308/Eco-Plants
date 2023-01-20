@@ -18,8 +18,8 @@ import ProductPage from "./pages/ProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import { ToastContainer } from "react-toastify";
 import { ReactQueryDevtools } from "react-query/devtools";
-import EditProductsPage from "./pages/EditProductsPage";
 import EditProductPage from "./pages/EditProductPage";
+import EditProductsPage from "./pages/EditProductsPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 import SuccessPage from "./pages/SuccessPage";
 import CancelPage from "./pages/CancelPage";
@@ -27,7 +27,7 @@ import HousePlantsPage from "./pages/HousePlantsPage";
 import GardenPlantsPage from "./pages/GardenPlantsPage";
 import SeedsPage from "./pages/SeedsPage";
 import AccessoriesPage from "./pages/AccessoriesPage";
-
+import ShippingPage from "./pages/ShippingPage";
 
 function App() {
 	return (
@@ -46,6 +46,7 @@ function App() {
 				<Route path="/shopping-cart" element={<ShoppingCartPage />} />
 				<Route path="/success" element={<SuccessPage />} />
 				<Route path="/cancel" element={<CancelPage />} />
+				<Route path="/shipping" element={<ShippingPage />} />
 
 				{["/house-plants/:type", "/garden-plants/:type","/seeds/:type","/accessories/:type"].map((path, index) => (
                   <Route key={index} path={path} element={<ProductsPage />} />

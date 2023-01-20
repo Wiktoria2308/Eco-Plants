@@ -1,51 +1,15 @@
 import { BsCardChecklist } from "react-icons/bs";
-import { loadStripe } from "@stripe/stripe-js";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-let stripePromise;
+const OrderShoppingCart = ({ total }) => {
 
-const getStripe = () => {
-  if (!stripePromise) {
-    stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
-  }
-  return stripePromise;
+const navigate = useNavigate();
+
+
+const handleClick = (e) => {
+  e.preventDefault();
+  navigate('/shipping')
 }
-
-const OrderShoppingCart = ({products, total }) => {
-  const [stripeError, setStripeError] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-
-  const checkoutData = products.map(item => (
-
-      {
-        price: item.price_id,
-        quantity: item.shopQuantity,
-        
-      }
-  ));
- 
-  const checkoutOptions = {
-    lineItems: checkoutData,
-    mode: "payment",
-    successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancelUrl: `${window.location.origin}/cancel`,
-  };
-
-
-  const redirectToCheckout = async () => {
-    setLoading(true);
-
-    const stripe = await getStripe();
-    const { error } = await stripe.redirectToCheckout(checkoutOptions);
-    
-    console.log("Stripe checkout error", error);
-
-    if (error) setStripeError(error.message);
-    setLoading(false);
-  };
-  if (stripeError) alert(stripeError);
-
-
 
   return (
     <div className="order-shopping-cart-container">
@@ -64,10 +28,9 @@ const OrderShoppingCart = ({products, total }) => {
     
       <button
         className="go-to-checkout-button"
-        onClick={redirectToCheckout}
-        disabled={isLoading}
+        onClick={handleClick}
       >
-        {isLoading ? "Loading..." : "Checkout"}
+      Checkout
       </button>
 
     </div>

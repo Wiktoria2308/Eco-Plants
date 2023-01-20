@@ -55,8 +55,8 @@ const LoginPage = () => {
 						</Card.Body>
 					</Card>
 
-					<div className="text-center mt-3">
-						Need an account? <Link to="/signup">Sign Up</Link>
+					<div className="text-center mt-3 text-white">
+						Need an account? <Link to="/signup" className="text-white" >Sign Up</Link>
 					</div>
 				</Col>
 			</Row>

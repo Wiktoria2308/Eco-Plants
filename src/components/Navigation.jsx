@@ -55,7 +55,7 @@ const Navigation = () => {
 
 	return (
 		<>
-		{ pathname !== "/shopping-cart" &&  pathname !== "/checkout" && pathname !== "/success" && pathname !== "/cancel" ? <Navbar expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
+		{ pathname !== "/shopping-cart" &&  pathname !== "/checkout" && pathname !== "/success" && pathname !== "/cancel" && pathname !== "/shipping" ? <Navbar expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
 		<Container className="justify-content-end ">
 			<Navbar.Brand as={Link} to="/" className="nav-brand col-9 col-md-6">
 				<img className="brand-title" src={Title} alt="brand-title" />
