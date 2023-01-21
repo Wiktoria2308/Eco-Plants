@@ -3,6 +3,7 @@ import Carousel from '../components/CarouselPlants'
 
 
 const HomePage = () => {
+  
   return (
     <div className="homepage">
       <div className="home-header-container">

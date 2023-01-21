@@ -108,7 +108,7 @@ $white: #FFFFFF;
           border: 0;
           background: #efae45;
           padding: 8px 5px;
-          color: $white;
+          color: #515151;
           text-transform: uppercase;
           width: 100%;
           font-family: inherit;
@@ -117,6 +117,7 @@ $white: #FFFFFF;
           border-radius: 3px;
           font-size: 20px;
           cursor: pointer;
+          box-shadow: inset 0 0 0 1px rgb(50 50 93 / 10%), 0 2px 5px 0 rgb(50 50 93 / 10%), 0 1px 1px 0 rgb(0 0 0 / 7%);
           &:hover {
             background-color:  #f09400;
           }
@@ -189,7 +190,7 @@ $white: #FFFFFF;
       border: 0;
       background: #efae45;
       padding: 8px 5px;
-      color: $white;
+      color: #515151;
       text-transform: uppercase;
       width: 100%;
       font-family: inherit;
@@ -197,6 +198,8 @@ $white: #FFFFFF;
       font-weight: 500;
       border-radius: 3px;
       font-size: 20px;
+      box-shadow: inset 0 0 0 1px rgb(50 50 93 / 10%), 0 2px 5px 0 rgb(50 50 93 / 10%), 0 1px 1px 0 rgb(0 0 0 / 7%);
+
       cursor: pointer;
       &:hover {
         background-color:  #f09400;

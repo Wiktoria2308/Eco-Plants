@@ -1,9 +1,9 @@
 import { useAuthContext } from "../contexts/AuthContext";
-import GuestAddressForm from "../components/GuestAddressForm";
 import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import UserAddressForm from "../components/UserAddressForm";
+
 
 let stripePromise;
 
@@ -48,15 +48,11 @@ const ShippingPage = () => {
 
   return (
     <>
-      {currentUser ? (
         <UserAddressForm
           user={currentUser}
           redirect={redirectToCheckout}
           loading={isLoading}
         />
-      ) : (
-        <GuestAddressForm redirect={redirectToCheckout} loading={isLoading} />
-      )}
     </>
   );
 };

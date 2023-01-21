@@ -7,7 +7,7 @@ import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
 import { useState, useEffect } from "react";
 
-const GuestAddressForm = ({ user, redirect, loading }) => {
+const UserAddressForm = ({ user, redirect, loading }) => {
   const [data, setData] = useState(null);
 
   const {
@@ -20,24 +20,33 @@ const GuestAddressForm = ({ user, redirect, loading }) => {
 
   useEffect(() => {
     if (data) {
-      let order = localStorage.getItem("order")
-        ? []
-        : JSON.parse(localStorage.getItem("order"));
+      let order = localStorage.getItem("order") ? JSON.parse(localStorage.getItem('order')) : [];
+     if(order){
+      localStorage.setItem("order",  JSON.stringify([]));
+      let orderArray = [];
+      orderArray.push(data)
+      localStorage.setItem("order", JSON.stringify(orderArray));
+      redirect();
+     }
 
-      order.push(data);
-
-      localStorage.setItem("order", JSON.stringify(order));
     }
   }, [data]);
 
   const onCreate = async (data) => {
-    data.uid = user.uid;
-    data.email = user.email;
-
-    if (data) {
-      setData(data);
+    if(user){
+      data.uid = user.uid;
+      data.email = user.email;
+  
+      if (data) {
+        setData(data);
+      }
     }
-
+    else{
+      if (data) {
+        setData(data);
+      }
+    }
+  
     reset();
   };
 
@@ -73,6 +82,19 @@ const GuestAddressForm = ({ user, redirect, loading }) => {
                 <div className="error-message">{errors.last_name.message}</div>
               )}
             </Form.Group>
+
+            { !user ?   <Form.Group controlId="e_mail" className="mb-3">
+              <Form.Label>E-mail *</Form.Label>
+              <Form.Control
+                type="text"
+                {...register("e_mail", {
+                  required: "Please enter Email.",
+                })}
+              />
+              {errors.e_mail && (
+                <div className="error-message">{errors.e_mail.message}</div>
+              )}
+            </Form.Group> : null}
 
             <Form.Group controlId="tel" className="mb-3">
               <Form.Label>Telephone *</Form.Label>
@@ -118,7 +140,7 @@ const GuestAddressForm = ({ user, redirect, loading }) => {
             <Button
               className="go-to-payment-button"
               type="submit"
-              onClick={redirect}
+              // onClick={redirect}
               disabled={loading}
             >
               {loading ? "Loading..." : "Go to payment"}
@@ -130,4 +152,4 @@ const GuestAddressForm = ({ user, redirect, loading }) => {
   );
 };
 
-export default GuestAddressForm;
+export default UserAddressForm;

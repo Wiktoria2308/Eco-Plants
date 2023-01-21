@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 import { resetStateTotal } from "../reducers/totalPrice";
 import { resetStateCart } from "../reducers/shoppingCartReducer";
 import { useDispatch } from "react-redux";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase/index";
+import { useSelector } from "react-redux";
+
 
 axios.defaults.baseURL = "https://api.stripe.com";
 
@@ -15,20 +19,34 @@ axios.defaults.headers.common = { Authorization: `Bearer ${stripe_api_key}` };
 
 const SuccessPage = () => {
   let [searchParams] = useSearchParams();
-  const [data, setData] = useState(null);
+
   const dispatch = useDispatch();
   const sessionID = searchParams.get("session_id");
+  const products = useSelector(state => state.shoppingCart.value)
+	const total = useSelector(state => state.total.balance)
+  const [order] = useState(localStorage.getItem('order') ? JSON.parse(localStorage.getItem('order')) : [])
 
   const getSessionInfo = async (session_id) => {
     await axios
       .get(`/v1/checkout/sessions/${session_id}`)
       .then((response) => {
         if (response.data.payment_status === "paid") {
-          setData(response.data);
-          dispatch(resetStateTotal());
-          dispatch(resetStateCart());
-        } else {
-          setData(null);
+          
+          if(order){
+            let newOrder = order;
+            newOrder.session_id = session_id;
+            newOrder.total_price = total;
+            newOrder.created = response.data.created;
+            let items = []
+            products.forEach((product) => {
+              let item = {id: product.id, name: product.name, quantity:product.shopQuantity, total_sum: product.total}
+              items.push(item)
+            })
+            newOrder.products = items;
+            dispatch(resetStateTotal());
+            dispatch(resetStateCart());
+            saveOrder(newOrder);
+          }
         }
       })
       .catch((error) => {
@@ -36,13 +54,30 @@ const SuccessPage = () => {
       });
   };
 
+  const saveOrder = async(data) => {
+    if(JSON.parse(localStorage.getItem('order')).length > 0){
+        //running twice in strict mode and writing twice to database
+        try{
+          await addDoc(collection(db, "orders"), {
+            ...data,
+         }); 
+        }catch(error) {  
+          console.warn(e);
+    }
+  }
+      localStorage.setItem("order", JSON.stringify([]));  
+      localStorage.setItem("persistantState", JSON.stringify({})); 
+  }
+  
+
+
+  
   useEffect(() => {
     if (sessionID) {
       getSessionInfo(sessionID);
     }
-  }, [sessionID]);
+  }, []);
 
-  // console.log("data", data);
 
   return (
     <div className="success-page-container">
