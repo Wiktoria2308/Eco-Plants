@@ -1,8 +1,15 @@
 
 import Carousel from '../components/CarouselPlants'
-
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+     e.preventDefault(); 
+     navigate('/all-products')
+  }
   
   return (
     <div className="homepage">
@@ -11,7 +18,7 @@ const HomePage = () => {
           <h1>Find your favourite plant</h1>
           <p>In our eco friendly online store</p>
           <div className="btn-container">
-            <button className="button-shop-now">
+            <button className="button-shop-now" onClick={handleClick}>
               <span className="text">Shop Now</span>
               <div className="icon-container">
                 <div className="icon icon--left">

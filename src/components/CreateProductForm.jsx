@@ -5,13 +5,14 @@ import { useForm } from "react-hook-form";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/index";
 import { toast } from "react-toastify";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { storage } from "../firebase";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 const CreateProductForm = () => {
     const [photo, setPhoto] = useState(false);
-    const plantPhoto = useRef();
+	const [photoInfo, setPhotoInfo] = useState("")
+  
 
 	const {
 		formState: { errors },
@@ -30,7 +31,7 @@ const CreateProductForm = () => {
 		}
 		setPhoto(e.target.files[0]);
 	};
-
+	
 
 	const onCreate = async (data) => {
         if (photo) {
@@ -42,17 +43,20 @@ const CreateProductForm = () => {
 
 			const photoURL = await getDownloadURL(uploadResult.ref);
 
-            await addDoc(collection(db, "products"), {
-                ...data,
-                photoURL: photoURL,
-            });
-            }
-		
-           
-
-		toast.success("Product added!");
-        plantPhoto.value = "No photo selected";
-		reset();
+			if(photoURL){
+				await addDoc(collection(db, "products"), {
+					...data,
+					photoURL: photoURL,
+				});
+				}
+				toast.success("Product added!");
+				reset();
+				setPhotoInfo("");
+			}
+			else {
+             setPhotoInfo("No photo selected");
+			}
+        
 	};
  
 
@@ -171,6 +175,7 @@ const CreateProductForm = () => {
                         { watchAllFields.category === "Garden plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="height" className="mb-3">
 							<Form.Label>Height {'(cm)'} *</Form.Label>
 							<Form.Control
+							    min={1}
 								type="number"
 								{...register("height", {
 									required: "Please enter the height.",
@@ -182,6 +187,7 @@ const CreateProductForm = () => {
                         { watchAllFields.category === "Garden plants" ||  watchAllFields.category === "Houseplants" ?  <Form.Group controlId="pot_size" className="mb-3">
 							<Form.Label>Pot size {'(cm)'} *</Form.Label>
 							<Form.Control
+							    min={1}
 								type="number"
 								{...register("pot_size", {
 									required: "Please enter the size of the pot.",
@@ -209,6 +215,7 @@ const CreateProductForm = () => {
                         { watchAllFields.category === "Seeds" ||  watchAllFields.category === "Accessories" ?  <Form.Group controlId="height" className="mb-3">
 							<Form.Label>Height {'(cm)'}</Form.Label>
 							<Form.Control
+							    min={1}
 								type="number"
 								{...register("height")}
 							/>
@@ -227,9 +234,21 @@ const CreateProductForm = () => {
 							{errors.price ? <div className="error-message">{errors.price.message}</div> : null}
 						</Form.Group>
 
+                        <Form.Group controlId="price_id" className="mb-3">
+							<Form.Label>Price Stripe ID *</Form.Label>
+							<Form.Control
+								type="text"
+								{...register("price_id", {
+									required: "Please enter the price ID from Stripe."
+								})}
+							/>
+							{errors.price_id ? <div className="error-message">{errors.price_id.message}</div> : null}
+						</Form.Group>
+
                         <Form.Group controlId="quantity" className="mb-3">
 							<Form.Label>Quantity *</Form.Label>
 							<Form.Control
+								min={0}
 								type="number"
 								{...register("quantity", {
 									required: "Please enter the quantity of products.",
@@ -250,7 +269,7 @@ const CreateProductForm = () => {
 					<Form.Text>
 						{photo
 							? `${photo.name} (${Math.round(photo.size / 1024)} kB)`
-							: <p className="select-photo" ref={plantPhoto}>No photo selected</p>}
+							  : <p className="select-photo">{photoInfo}</p> }
 					</Form.Text>
 				</Form.Group>
 

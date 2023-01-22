@@ -28,6 +28,8 @@ import GardenPlantsPage from "./pages/GardenPlantsPage";
 import SeedsPage from "./pages/SeedsPage";
 import AccessoriesPage from "./pages/AccessoriesPage";
 import ShippingPage from "./pages/ShippingPage";
+import OrdersPage from "./pages/OrdersPage";
+import AllProductsPage from "./pages/AllProductsPage"
 
 function App() {
 	return (
@@ -47,6 +49,7 @@ function App() {
 				<Route path="/success" element={<SuccessPage />} />
 				<Route path="/cancel" element={<CancelPage />} />
 				<Route path="/shipping" element={<ShippingPage />} />
+				<Route path="/all-products" element={<AllProductsPage />} />
 
 				{["/house-plants/:type", "/garden-plants/:type","/seeds/:type","/accessories/:type"].map((path, index) => (
                   <Route key={index} path={path} element={<ProductsPage />} />
@@ -67,6 +70,14 @@ function App() {
 					element={
 						<RequireAuth>
 							<UpdateProfilePage />
+						</RequireAuth>
+					}
+				/>
+					<Route
+					path="/my-orders"
+					element={
+						<RequireAuth>
+							<OrdersPage />
 						</RequireAuth>
 					}
 				/>
@@ -95,6 +106,14 @@ function App() {
 						<RequireAdminAuth>
 							<EditProductsPage />
 						</RequireAdminAuth>
+					}
+				/>
+				<Route
+					path="/orders"
+					element={
+						<RequireAuth>
+							<OrdersPage />
+						</RequireAuth>
 					}
 				/>
 				<Route

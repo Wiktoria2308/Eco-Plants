@@ -256,3 +256,9 @@ $white: #FFFFFF;
   }
  
 }
+
+@media (max-width: 767px) {
+  .products-page-container{
+    height: 100%;
+  }
+}

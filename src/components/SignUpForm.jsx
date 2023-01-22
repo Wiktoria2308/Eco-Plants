@@ -16,6 +16,7 @@ const SignupForm = ({ setFormValues }) => {
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
 
+
 	const handlePhotoChange = (e) => {
 		if (!e.target.files.length) {
 			setPhoto(null);

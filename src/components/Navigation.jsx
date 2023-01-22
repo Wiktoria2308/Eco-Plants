@@ -105,6 +105,10 @@ const Navigation = () => {
 									Update Profile
 								</NavLink>
 								<NavDropdown.Divider />
+								<NavLink to="/my-orders" className="dropdown-item">
+									My orders
+								</NavLink>
+								<NavDropdown.Divider />
 								<NavLink to="/logout" className="dropdown-item">
 									Log Out
 								</NavLink>
@@ -143,6 +147,10 @@ const Navigation = () => {
 							<NavLink to="/create_product" className="dropdown-item">
 								Create product
 							</NavLink>
+							<NavDropdown.Divider />
+							<NavLink to="/orders" className="dropdown-item">
+									Orders
+								</NavLink>
 							<NavDropdown.Divider />
 							<NavLink to="/update-profile" className="dropdown-item">
 								Update Profile

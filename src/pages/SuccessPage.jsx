@@ -11,6 +11,7 @@ import { db } from "../firebase/index";
 import { useSelector } from "react-redux";
 
 
+
 axios.defaults.baseURL = "https://api.stripe.com";
 
 const stripe_api_key = import.meta.env.VITE_STRIPE_SECRET_KEY;
@@ -33,16 +34,25 @@ const SuccessPage = () => {
         if (response.data.payment_status === "paid") {
           
           if(order){
-            let newOrder = order;
-            newOrder.session_id = session_id;
-            newOrder.total_price = total;
-            newOrder.created = response.data.created;
+            // let newOrder = order[0];
+           
+            // newOrder.session_id = session_id;
+            // newOrder.total_price = total;
+            // const date = new Date(response.data.created * 1000);
+            // newOrder.created = FieldValue.serverTimestamp(response.data.created);
             let items = []
             products.forEach((product) => {
               let item = {id: product.id, name: product.name, quantity:product.shopQuantity, total_sum: product.total}
               items.push(item)
             })
-            newOrder.products = items;
+            // newOrder.products = items;
+            let newOrder = {
+              ...order[0],
+              session_id : session_id,
+              total_price: total,
+              products : items,
+              created : new Date(response.data.created * 1000),
+            }
             dispatch(resetStateTotal());
             dispatch(resetStateCart());
             saveOrder(newOrder);
@@ -62,7 +72,7 @@ const SuccessPage = () => {
             ...data,
          }); 
         }catch(error) {  
-          console.warn(e);
+          console.warn(error);
     }
   }
       localStorage.setItem("order", JSON.stringify([]));  

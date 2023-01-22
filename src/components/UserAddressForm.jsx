@@ -34,7 +34,6 @@ const UserAddressForm = ({ user, redirect, loading }) => {
 
   const onCreate = async (data) => {
     if(user){
-      data.uid = user.uid;
       data.email = user.email;
   
       if (data) {
