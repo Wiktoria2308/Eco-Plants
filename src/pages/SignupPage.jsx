@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-import SignupForm from "../components/SignupForm";
+import SignupForm from "../components/SignUpForm";
 
 const SignupPage = () => {
 	const [formValues, setFormValues] = useState();
