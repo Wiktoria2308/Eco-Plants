@@ -26,8 +26,7 @@ const EditProductForm = ({ product }) => {
   const { handleSubmit, register } = useForm();
 
   const onEdit = async (data) => {
-	console.log(data.price)
-	console.log(product.price)
+
     if (data.price) {
 		if(data.price_id === ""){
 			setPriceIdInfo("Please enter the price ID from Stripe.");

@@ -20,7 +20,19 @@ const ProductsListCard = ({ product }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    navigate(`${location.pathname}/${product.id}`)
+    const twoSlash = /\/.*\//.test(location.pathname )
+    if(twoSlash){
+
+      navigate(`${location.pathname}/${product.id}`)
+    }
+    else {
+      let productType = product.type;
+      if(productType.includes(" ")){
+        productType = productType.replace(" ", "-")
+     }
+      navigate(`${location.pathname}/${productType}/${product.id}`)
+    }
+   
   }
 
   const handleAddToCart = (product) => {

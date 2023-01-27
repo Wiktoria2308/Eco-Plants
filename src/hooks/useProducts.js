@@ -18,10 +18,12 @@ const useProducts = () => {
 
          useEffect(() => {
             const colRef = collection(db, "products")
-            const fixType = type.charAt(0).toUpperCase() + type.slice(1);
+            let fixType = type.charAt(0).toUpperCase() + type.slice(1);
+            if(fixType.includes("-")){
+               fixType = fixType.replace("-", " ")
+            }
             const queryRef = query(colRef, where("type", "==", fixType))
     
-       
             const unsubscribe = onSnapshot(queryRef, (snapshot) => {
                 const docs = snapshot.docs.map(doc => {
                     return {
