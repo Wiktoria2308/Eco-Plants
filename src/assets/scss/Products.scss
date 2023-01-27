@@ -174,12 +174,13 @@ $white: #FFFFFF;
   .products-list-card-col{
     margin-bottom: 20px;
   }
-  
+
   .products-list-card {
     border: 0 !important;
 
     .card-title {
       cursor: pointer;
+      font-size: 17px;
       &:hover{
         text-decoration: underline;
       }
