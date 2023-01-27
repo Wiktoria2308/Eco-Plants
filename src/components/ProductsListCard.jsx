@@ -35,7 +35,7 @@ const ProductsListCard = ({ product }) => {
 
   return (
 
-  <Col style={{maxWidth: '300px'}}>
+  <Col className="products-list-card-col" style={{maxWidth: '300px'}}>
       <Card className="products-list-card">
         <Card.Img
           variant="top"
