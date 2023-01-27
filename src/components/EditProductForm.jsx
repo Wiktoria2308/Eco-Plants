@@ -54,7 +54,7 @@ const EditProductForm = ({ product }) => {
         location: data.location || product.location,
         photoURL: photoURL || product.photoURL,
         pot_size: data.pot_size || product.pot_size,
-        price: data.price || product.pot_size,
+        price: data.price || product.price,
         price_id: data.price_id || product.price_id,
         quantity: data.quantity || product.quantity,
       };
@@ -72,7 +72,7 @@ const EditProductForm = ({ product }) => {
         location: data.location || product.location,
         photoURL: product.photoURL,
         pot_size: data.pot_size || product.pot_size,
-        price: data.price || product.pot_size,
+        price: data.price || product.price,
         price_id: data.price_id || product.price_id,
         quantity: data.quantity || product.quantity,
       };
