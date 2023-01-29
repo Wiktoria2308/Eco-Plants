@@ -69,9 +69,9 @@ function App() {
 		  "/house-plants/orchids/:id",
           "/garden-plants/berry-bushes/:id",
 		  "/garden-plants/ornamental-shrubs/:id",
-          "/seeds/vegetable/:id",
-		  "/seeds/herbs/:id",
-		  "/seeds/flower/:id",
+          "/seeds/vegetable-seeds/:id",
+		  "/seeds/herbs-seeds/:id",
+		  "/seeds/flower-seeds/:id",
         ].map((path, index) => (
           <Route key={index} path={path} element={<ProductPage />} />
         ))}

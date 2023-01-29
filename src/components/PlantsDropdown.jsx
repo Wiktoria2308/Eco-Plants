@@ -90,21 +90,21 @@ const PlantsDropdown = () => {
         </Dropdown.Item>
         <Dropdown.Item
           as={NavLink}
-          to="/seeds/vegetable"
+          to="/seeds/vegetable-seeds"
           className="categories-item"
         >
           Vegetable seeds
         </Dropdown.Item>
         <Dropdown.Item
           as={NavLink}
-          to="/seeds/herbs"
+          to="/seeds/herbs-seeds"
           className="categories-item"
         >
           Herbs seeds
         </Dropdown.Item>
         <Dropdown.Item
           as={NavLink}
-          to="/seeds/flower"
+          to="/seeds/flower-seeds"
           className="categories-item"
         >
           Flower seeds

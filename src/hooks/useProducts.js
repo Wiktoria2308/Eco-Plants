@@ -22,9 +22,6 @@ const useProducts = () => {
             if(fixType.includes("-")){
                fixType = fixType.replace("-", " ")
             }
-            if(fixType.includes('Vegetable') || fixType.includes('Herbs') ||fixType.includes('Flower')){
-            fixType = fixType + " seeds"
-            }
 
             const queryRef = query(colRef, where("type", "==", fixType))
     
