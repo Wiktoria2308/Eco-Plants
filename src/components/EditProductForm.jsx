@@ -27,12 +27,16 @@ const EditProductForm = ({ product }) => {
 
   const onEdit = async (data) => {
 
+
     if (data.price) {
 		if(data.price_id === ""){
 			setPriceIdInfo("Please enter the price ID from Stripe.");
 			return;
 		}
-      
+    }
+    let category = '';
+    if(data.category === ''){
+      category = product.category;
     }
 
     if (photo) {
@@ -43,42 +47,83 @@ const EditProductForm = ({ product }) => {
       const uploadResult = await uploadBytes(fileRef, photo);
 
       const photoURL = await getDownloadURL(uploadResult.ref);
+      
+      if(category === "Seeds" || category === "Accessories"){
+        let newData = {
+          name: data.name || product.name,
+          description: data.description || product.description,
+          category: data.category || product.category,
+          type: data.type || product.type,
+          height: data.height || product.height,
+          photoURL: photoURL || product.photoURL,
+          price: data.price || product.price,
+          price_id: data.price_id || product.price_id,
+          quantity: data.quantity || product.quantity,
+        };
+        const docRef = doc(db, "products", product.id);
+        await updateDoc(docRef, newData);
+  
+        toast.success("Product updated!");
+      }
+      else {
+          let newData = {
+              name: data.name || product.name,
+              description: data.description || product.description,
+              category: data.category || product.category,
+              type: data.type || product.type,
+              height: data.height || product.height,
+              location: data.location || product.location,
+              photoURL: photoURL || product.photoURL,
+              pot_size: data.pot_size || product.pot_size,
+              price: data.price || product.price,
+              price_id: data.price_id || product.price_id,
+              quantity: data.quantity || product.quantity,
+            };
+            const docRef = doc(db, "products", product.id);
+            await updateDoc(docRef, newData);
+      
+            toast.success("Product updated!");
+      }
 
-      let newData = {
-        name: data.name || product.name,
-        description: data.description || product.description,
-        category: data.category || product.category,
-        type: data.type || product.type,
-        height: data.height || product.height,
-        location: data.location || product.location,
-        photoURL: photoURL || product.photoURL,
-        pot_size: data.pot_size || product.pot_size,
-        price: data.price || product.price,
-        price_id: data.price_id || product.price_id,
-        quantity: data.quantity || product.quantity,
-      };
-      const docRef = doc(db, "products", product.id);
-      await updateDoc(docRef, newData);
-
-      toast.success("Product updated!");
     } else {
-      let newData = {
-        name: data.name || product.name,
-        description: data.description || product.description,
-        category: data.category || product.category,
-        type: data.type || product.type,
-        height: data.height || product.height,
-        location: data.location || product.location,
-        photoURL: product.photoURL,
-        pot_size: data.pot_size || product.pot_size,
-        price: data.price || product.price,
-        price_id: data.price_id || product.price_id,
-        quantity: data.quantity || product.quantity,
+        if(category === "Seeds" || category === "Accessories"){
+          let newData = {
+            name: data.name || product.name,
+            description: data.description || product.description,
+            category: data.category || product.category,
+            type: data.type || product.type,
+            height: data.height || product.height,
+            photoURL: product.photoURL,
+            price: data.price || product.price,
+            price_id: data.price_id || product.price_id,
+            quantity: data.quantity || product.quantity,
+          }
+          const docRef = doc(db, "products", product.id);
+          await updateDoc(docRef, newData);
+    
+          toast.success("Product updated!");
+          
+        }
+        else {
+          let newData = {
+          name: data.name || product.name,
+          description: data.description || product.description,
+          category: data.category || product.category,
+          type: data.type || product.type,
+          height: data.height || product.height,
+          location: data.location || product.location,
+          photoURL: product.photoURL,
+          pot_size: data.pot_size || product.pot_size,
+          price: data.price || product.price,
+          price_id: data.price_id || product.price_id,
+          quantity: data.quantity || product.quantity,
+        }
+        const docRef = doc(db, "products", product.id);
+        await updateDoc(docRef, newData);
+  
+        toast.success("Product updated!");
+      
       };
-      const docRef = doc(db, "products", product.id);
-      await updateDoc(docRef, newData);
-
-      toast.success("Product updated!");
     }
   };
 
