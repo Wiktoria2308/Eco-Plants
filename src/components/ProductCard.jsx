@@ -37,18 +37,18 @@ return (
     <h1>{data.price} kr</h1>
     <p className='product-description'>{data.description}</p>
     <div className='product-attributes'>
-      <div className='product-attribute'>
+     {data.height !== "" ? <div className='product-attribute'>
         <MdHeight className='attribute-icon'/>
         <p>Height: <span className='product-attribute-data'>{data.height} cm</span></p>
-      </div>
-      <div className='product-attribute'>
+      </div> : null }
+      {data.pot_size ? <div className='product-attribute'>
         <TbCircleHalfVertical  className='attribute-icon'/>
         <p>Pot size: <span className='product-attribute-data'>{data.pot_size} cm</span></p>
-      </div>
-      <div className='product-attribute'>
+      </div> : null }
+      {data.location ?  <div className='product-attribute'>
         <TiWeatherPartlySunny  className='attribute-icon'/>
         <p>Location: <span className='product-attribute-data'>{data.location}</span></p>
-      </div>
+      </div> :null }
     
     </div>
     {data.quantity >= 5 ? <p className='stock-status stock-status-available'>Available</p> :null}

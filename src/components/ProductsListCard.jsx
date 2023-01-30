@@ -58,12 +58,19 @@ const ProductsListCard = ({ product }) => {
         />
         <Card.Body >
           <Card.Title onClick={handleClick}>{product.name}</Card.Title>
-          <Card.Subtitle>  <MdHeight className='card-height-icon'/><span className="product-height">{product.height} cm</span></Card.Subtitle>
+          { product.height !== "" ?<Card.Subtitle> 
+        <MdHeight className='card-height-icon'/>
+         <span className="product-height">{product.height} cm</span> 
+             </Card.Subtitle> : null}
           <Card.Text>
            {product.price} kr
           </Card.Text>
         </Card.Body>
-        <Card.Footer> <button className='add-to-cart' onClick={()=>{handleAddToCart(product)}}>Add to Cart</button></Card.Footer>
+        <Card.Footer>
+        { product.quantity > 0 ? <button className='add-to-cart' onClick={()=>{handleAddToCart(product)}}>Add to Cart</button>  : null }
+        { product.quantity === 0 ? <button className='add-to-cart disabled' disabled>Out of stock</button>  : null }
+
+        </Card.Footer>
       </Card>
       </Col>
 

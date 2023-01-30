@@ -34,18 +34,12 @@ const SuccessPage = () => {
         if (response.data.payment_status === "paid") {
           
           if(order){
-            // let newOrder = order[0];
-           
-            // newOrder.session_id = session_id;
-            // newOrder.total_price = total;
-            // const date = new Date(response.data.created * 1000);
-            // newOrder.created = FieldValue.serverTimestamp(response.data.created);
+          
             let items = []
             products.forEach((product) => {
               let item = {id: product.id, name: product.name, quantity:product.shopQuantity, total_sum: product.total}
               items.push(item)
             })
-            // newOrder.products = items;
             let newOrder = {
               ...order[0],
               session_id : session_id,
