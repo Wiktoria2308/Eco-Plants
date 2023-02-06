@@ -58,10 +58,7 @@ const ProductsListCard = ({ product }) => {
         />
         <Card.Body >
           <Card.Title onClick={handleClick}>{product.name}</Card.Title>
-          { product.height !== "" ?<Card.Subtitle> 
-        <MdHeight className='card-height-icon'/>
-         <span className="product-height">{product.height} cm</span> 
-             </Card.Subtitle> : null}
+          
           <Card.Text>
            {product.price} kr
           </Card.Text>
