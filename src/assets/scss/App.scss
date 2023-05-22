@@ -332,5 +332,32 @@ color: $white;
 			text-decoration: underline;
 		}
 	}
+	.home-header-container {
+		margin-top: 50px;
+		flex-direction: column;
+		height: 100%;
+		h1 {
+			font-size: 40px;
+		}
+	
+	}
+	.navbar {
+		.brand-title {
+			width: 100px;
+		}
+		.navlink-login, .shopping-cart-link{
+			margin-right: 20px;
+		}
+		.navbar-nav .dropdown-menu {
+			position: absolute;
+		}
+	}
+	.dropdown-menu[data-bs-popper]{
+		right: 0;
+		left: auto;
+	}
+	.products-dropdown .dropdown-menu, .profile-dropdown .dropdown-menu {
+		transform: initial;
+	}
 }
 

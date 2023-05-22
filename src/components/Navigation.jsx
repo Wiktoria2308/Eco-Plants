@@ -67,13 +67,13 @@ const Navigation = () => {
 
 				<PlantsDropdown />
 
-				<Nav.Link className="nav-color accessories-link" as={NavLink} to="/accessories">
+				<Nav.Link className="nav-color line-style line-style-link accessories-link" as={NavLink} to="/accessories">
 						Accessories
 					</Nav.Link>
 
 					{!currentUser && !isAdmin && (
 						<>
-							<Nav.Link className="nav-color line-style line-style-link" as={NavLink} to="/login">
+							<Nav.Link className="nav-color line-style line-style-link navlink-login" as={NavLink} to="/login">
 								Login/Signup
 							</Nav.Link>
 						</>
@@ -82,7 +82,7 @@ const Navigation = () => {
 					{currentUser && !isAdmin && (
 						<>
 							<NavDropdown
-								className="nav-color line-style line-style-link profile-dropdown"
+								className="nav-color line-style line-style-link profile-dropdown navlink-login"
 								title={
 									<>
 										<Image
@@ -118,7 +118,7 @@ const Navigation = () => {
 
 					{isAdmin && (
 						<NavDropdown
-							className="nav-color line-style line-style-link profile-dropdown"
+							className="nav-color line-style line-style-link profile-dropdown navlink-login"
 							title={
 								<>
 									<Image
