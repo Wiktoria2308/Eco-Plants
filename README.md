@@ -25,6 +25,7 @@ git clone https://github.com/Wiktoria2308/Eco-Plants.git
 npm install
 
 3. Create .env file and update the environment variables with your Firebase and Stripe credentials.
+```
 VITE_FIREBASE_API_KEY=
 VITE_FIREBASE_AUTH_DOMAIN=
 VITE_FIREBASE_PROJECT_ID=
@@ -33,6 +34,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
 VITE_STRIPE_API_KEY=
 VITE_STRIPE_SECRET_KEY=
+```
 
 ## Usage
 Start the development server by running the following command:
