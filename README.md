@@ -18,11 +18,13 @@ The key features of the project include:
 To run the Eco Plants locally, follow these steps:
 
 1. Clone the repository:
-
+```
 git clone https://github.com/Wiktoria2308/Eco-Plants.git
-
+```
 2. Install the dependencies:
+```
 npm install
+```
 
 3. Create .env file and update the environment variables with your Firebase and Stripe credentials.
 ```
@@ -38,7 +40,9 @@ VITE_STRIPE_SECRET_KEY=
 
 ## Usage
 Start the development server by running the following command:
+```
 npm run dev
+```
 
 The application will be accessible at http://localhost:3000 in your web browser.
 
