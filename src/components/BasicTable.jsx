@@ -12,7 +12,7 @@ const BasicTable = ({ columns, data }) => {
 	} = useTable({ columns, data })
 
 	return (
-		<Table hover {...getTableProps()}>
+		<Table hover responsive {...getTableProps()}>
 			<thead>
 				{headerGroups.map(headerGroup => (
 					<tr {...headerGroup.getHeaderGroupProps()}>

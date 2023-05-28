@@ -9,6 +9,9 @@ $white: #FFFFFF;
     .quantity-display{
       padding: 0 !important;
       font-size: 1.2rem !important;
+      @media (max-width:767px){
+        width: 3rem !important;
+      }
       }
       .table {
         background-color: white;
@@ -57,6 +60,9 @@ $white: #FFFFFF;
     text-align: center;
     margin: auto;
     margin-top: 100px;
+    @media (max-width: 767px) {
+      padding: 50px;
+    }
       .empty-cart-h1{
         margin-bottom: 20px;
         font-weight: 800;
@@ -71,6 +77,11 @@ $white: #FFFFFF;
     background: #f7f7f7;
     border: 1px solid #ddd;
     float:right;
+
+    @media (max-width:767px){
+      width: 100%;
+      padding: 15px;
+    }
 
     .order-shopping-cart-total{
         display: flex;
@@ -151,6 +162,29 @@ $white: #FFFFFF;
       color: #515151;
       font-size: 20px;
      }
+     @media (max-width: 767px) {
+      padding: 50px;
+      margin-top: 30px;
+  
+      .success-icon {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
+  
+      h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+  
+      p {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+  
+      .continue-shop {
+        font-size: 16px;
+      }
+    }
   }
 
 
@@ -214,6 +248,21 @@ $white: #FFFFFF;
         width: 100%;
       }
     }
+    @media (max-width: 767px) {
+      padding: 0;
+      width: auto;
+      margin: 5px;
+
+      form {
+        input {
+          width: 100%;
+        }
+      }
+    }
   }
 
- 
+@media (max-width:767px){
+    .table .quantity-picker {
+      display: initial !important;
+    }
+}

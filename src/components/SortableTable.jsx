@@ -6,7 +6,7 @@ const SortableTable = ({ columns, data }) => {
 		useTable({ columns, data }, useSortBy);
 
 	return (
-		<Table className="sortable-table" hover {...getTableProps()}>
+		<Table className="sortable-table" hover responsive {...getTableProps()}>
 			<thead>
 				{headerGroups.map((headerGroup) => (
 					<tr {...headerGroup.getHeaderGroupProps()}>

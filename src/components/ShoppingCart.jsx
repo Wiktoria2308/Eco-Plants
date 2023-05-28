@@ -89,7 +89,7 @@ const ShoppingCart = () => {
 	}, []);
 
 	return (
-		<Container className="py-3 table-responsive">
+		<Container className="py-3">
 			{products.length !== 0 ? <BasicTable columns={columns} data={products} /> :null}
             {products.length === 0 ? <EmptyShopingCart /> :null}
 			{products.length !== 0 ? <OrderShoppingCart total={total} />:null}

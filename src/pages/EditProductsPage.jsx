@@ -63,7 +63,7 @@ const EditProductsPage = () => {
 	}, []);
 
 	return (
-		<Container className="py-3 table-responsive table-container">
+		<Container className="py-3 table-container">
 			{data && <BasicTable columns={columns} data={data} />}
 		</Container>
 	);
