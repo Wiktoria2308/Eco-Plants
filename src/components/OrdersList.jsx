@@ -1,66 +1,146 @@
 import useOrders from "../hooks/useOrders";
+import SortableTable from "../components/SortableTable";
+import Container from "react-bootstrap/Container";
+import { useState } from "react";
+// import { useAuthContext } from "../contexts/AuthContext";
 
 
 const OrdersList = (admin) => {
+  // const { isAdmin } = useAuthContext();
+  const { data, isLoading, isError } = useOrders();
 
-    const { data } = useOrders();
+  console.log(data)
 
-    let ifArray = Array.isArray(data);
+  const filterField = admin ? "email" : null;
 
-    if(ifArray){
-        ifArray = data;
+  const [expandedOrders, setExpandedOrders] = useState([]);
+
+  const toggleOrder = (orderId) => {
+    if (expandedOrders.includes(orderId)) {
+      setExpandedOrders(expandedOrders.filter((id) => id !== orderId));
+    } else {
+      setExpandedOrders([...expandedOrders, orderId]);
     }
+  };
 
+
+  const renderProductDetails = (products) => {
     return (
-       <>
-   { admin.admin === "true" ? <div className="orders-page-container">
-       {data ? data.map((order, index) => (
-          <div key={index} className="orders-page">
-            <p>Order {index  + 1}:</p>
-            <p>User: {order.email}</p>
-            <p>Date: {new Date(order.created.seconds * 1000).toLocaleString('pl-PL')}</p>
-            <p>Total price: {order.total_price}</p>
-            <ol> <span>Products:</span>
-                { order.products.map((product, index) => (
-                   <li key={index}>
-                    <p>Product number: {product.id}</p>
-                    <p>Name: {product.name}</p>
-                    <p>Quantity: {product.quantity}</p>
-                    <p>Total sum: {product.total_sum}</p>
-                   </li>
-                ))}
-            </ol>
+      <div className="products-container"> 
+        {products.map((product, index) => (
+          <div className="product-item" key={index}>
+            <p><span>Product number:</span> {product.id}</p>
+            <p><span>Name:</span> {product.name}</p>    
+            {/* Add span and make font bold  */}
+            <p>Quantity: {product.quantity}</p>
+            <p>Total sum: {product.total_sum}</p>
+            {index !== products.length - 1 && <hr className="separator" />}
           </div>
-        )) : null }
-        { data === undefined || ifArray.length === 0 ? <div className="no-orders">You have no orders yet.</div> : null}
+        ))}
+      </div>
+    );
+  };
 
-         </div> : null}
+  const getButtonText = (orderId) => {
+    return expandedOrders.includes(orderId) ? "Hide Products" : "Show Products";
+  };
 
 
-       {admin.admin === "false" ? <div className="orders-page-container">
-       {data ? data.map((order, index) => (
-          <div key={index} className="orders-page">
-            <p>Order {index  + 1}:</p>
-            <p>Date: {new Date(order.created.seconds * 1000).toLocaleString('pl-PL')}</p>
-            <p>Total price: {order.total_price}</p>
-            <ol> <span>Products:</span>
-                { order.products.map((product, index) => (
-                   <li key={index}>
-                    <p>Product number: {product.id}</p>
-                    <p>Name: {product.name}</p>
-                    <p>Quantity: {product.quantity}</p>
-                    <p>Total sum: {product.total_sum}</p>
-                   </li>
-                ))}
-            </ol>
+  const columnsAdmin = [
+    {
+      Header: "Order",
+      accessor: (row, index) => `Order ${index + 1}`,
+      Cell: ({ value }) => <span>{value}</span>,
+    },
+    {
+      Header: "User",
+      accessor: "email",
+      Cell: ({ value }) => <span>{value}</span>,
+    },
+    {
+      Header: "Date",
+      accessor: (row) =>
+        new Date(row.created.seconds * 1000).toLocaleString("pl-PL"),
+      Cell: ({ value }) => <span>{value}</span>,
+    },
+    {
+      Header: "Total Price",
+      accessor: "total_price",
+      Cell: ({ value }) => <span>{value}</span>,
+    },
+    {
+      Header: "Products",
+      accessor: "products",
+      Cell: ({ value }) => (
+        <div className="products-cell">
+        <button className="toggle-button" onClick={() => toggleOrder(value)}>
+          {getButtonText(value)}
+        </button>
+        {expandedOrders.includes(value) && (
+          <div className="products-scroll-container">
+            {renderProductDetails(value)}
           </div>
-        )) : null } 
-        { data === undefined || ifArray.length === 0 ? <div className="no-orders">You have no orders yet.</div> : null}
-        </div>  : null}
+        )}
+      </div>
+      ),
+    },
+  ];
 
-       </>
+  const columnsUser = [
+    {
+      Header: "Order",
+      accessor: (row, index) => `Order ${index + 1}`,
+      Cell: ({ value }) => <span>{value}</span>,
+    },
+    {
+      Header: "Date",
+      accessor: (row) =>
+        new Date(row.created.seconds * 1000).toLocaleString("pl-PL"),
+      Cell: ({ value }) => <span>{value}</span>,
+    },
+    {
+      Header: "Total Price",
+      accessor: "total_price",
+      Cell: ({ value }) => <span>{value}</span>,
+    },
+    {
+      Header: "Products",
+      accessor: "products",
+      Cell: ({ value }) => (
+        <div className="products-cell">
+        <button className="toggle-button" onClick={() => toggleOrder(value)}>
+          {getButtonText(value)}
+        </button>
+        {expandedOrders.includes(value) && (
+          <div className="products-scroll-container">
+            {renderProductDetails(value)}
+          </div>
+        )}
+      </div>
+      ),
+    },
+  ];
 
-    )
-}
+  const columns = admin ? columnsAdmin : columnsUser;
+
+  return (
+    <div className="orders-page-container">
+      {isLoading ? 
+      <div>Loading orders...</div>
+      :null}
+      {isError ? 
+      <div>Error loading orders.</div>
+      :null}
+      {data && data.length > 0 ? (
+        <Container className="py-3 table-container">
+          <SortableTable columns={columns} data={data} filterField={filterField}/>
+        </Container>
+      ) : null}
+      {data === undefined || data.length === 0 ? (
+        <div className="no-orders">You have no orders yet.</div>
+      ) : null}
+    </div>
+  );
+};
 
 export default OrdersList;

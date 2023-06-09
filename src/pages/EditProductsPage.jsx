@@ -2,7 +2,7 @@ import useAllProducts from "../hooks/useAllProducts";
 import { useMemo } from "react";
 import { Button, ButtonGroup, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import BasicTable from "../components/BasicTable";
+import SortableTable from "../components/SortableTable";
 import useProduct from "../hooks/useProduct";
 
 const EditProductsPage = () => {
@@ -64,7 +64,7 @@ const EditProductsPage = () => {
 
 	return (
 		<Container className="py-3 table-container">
-			{data && <BasicTable columns={columns} data={data} />}
+			{data && <SortableTable columns={columns} data={data} filterField={'name'} />}
 		</Container>
 	);
 };

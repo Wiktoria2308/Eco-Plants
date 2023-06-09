@@ -1,22 +1,20 @@
 import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { Card, Col } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { MdHeight } from 'react-icons/md';
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { addToCart} from '../reducers/shoppingCartReducer'
 
 const ProductsListCard = ({ product }) => {
-  const [usePhotoUrl, setPhotoUrl] = useState(null);
+  const [isImageLoaded, setImageLoaded] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (product) {
-      setPhotoUrl(product.photoURL);
-    }
-  });
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  }
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -47,14 +45,22 @@ const ProductsListCard = ({ product }) => {
 
   return (
 
-  <Col className="products-list-card-col" style={{maxWidth: '300px'}}>
+  <Col className="products-list-card-col" style={{maxWidth: '250px'}}>
       <Card className="products-list-card">
+           {!isImageLoaded && (
+           <Card.Img
+              variant="top"
+              src={PlaceholderPhoto}
+              alt="Placeholder"
+            />
+        )}
         <Card.Img
           variant="top"
-          src={usePhotoUrl || PlaceholderPhoto}
-          className="card-photo"
+          src={product.photoURL}
+          className={`card-photo ${isImageLoaded ? 'show' : 'hide'}`}
           alt="plant photo"
           onClick={handleClick}
+          onLoad={handleImageLoad}
         />
         <Card.Body >
           <Card.Title onClick={handleClick}>{product.name}</Card.Title>

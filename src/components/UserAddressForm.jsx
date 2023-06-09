@@ -82,16 +82,16 @@ const UserAddressForm = ({ user, redirect, loading }) => {
               )}
             </Form.Group>
 
-            { !user ?   <Form.Group controlId="e_mail" className="mb-3">
+            { !user ?   <Form.Group controlId="email" className="mb-3">
               <Form.Label>E-mail *</Form.Label>
               <Form.Control
                 type="text"
-                {...register("e_mail", {
+                {...register("email", {
                   required: "Please enter Email.",
                 })}
               />
-              {errors.e_mail && (
-                <div className="error-message">{errors.e_mail.message}</div>
+              {errors.email && (
+                <div className="error-message">{errors.email.message}</div>
               )}
             </Form.Group> : null}
 

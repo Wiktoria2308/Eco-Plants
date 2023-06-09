@@ -11,7 +11,7 @@ import SignupPage from "./pages/SignupPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import UpdateProfilePage from "./pages/UpdateProfilePage";
 import UsersPage from "./pages/UsersPage";
-import RequireAuth from "./components/RequireUserAuth";
+import RequireUserAuth from "./components/RequireUserAuth";
 import RequireAdminAuth from "./components/RequireAdminAuth";
 import ProductsPage from "./pages/ProductsPage";
 import ProductPage from "./pages/ProductPage";
@@ -29,6 +29,7 @@ import SeedsPage from "./pages/SeedsPage";
 import AccessoriesPage from "./pages/AccessoriesPage";
 import ShippingPage from "./pages/ShippingPage";
 import OrdersPage from "./pages/OrdersPage";
+import OrdersUserPage from "./pages/OrdersUserPage";
 import AllProductsPage from "./pages/AllProductsPage";
 
 
@@ -98,17 +99,17 @@ function App() {
         <Route
           path="/update-profile"
           element={
-            <RequireAuth>
+            <RequireUserAuth>
               <UpdateProfilePage />
-            </RequireAuth>
+            </RequireUserAuth>
           }
         />
         <Route
           path="/my-orders"
           element={
-            <RequireAuth>
-              <OrdersPage />
-            </RequireAuth>
+            <RequireUserAuth>
+              <OrdersUserPage />
+            </RequireUserAuth>
           }
         />
 
@@ -141,9 +142,9 @@ function App() {
         <Route
           path="/orders"
           element={
-            <RequireAuth>
+            <RequireAdminAuth>
               <OrdersPage />
-            </RequireAuth>
+            </RequireAdminAuth>
           }
         />
         <Route

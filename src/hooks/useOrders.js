@@ -1,38 +1,46 @@
-import { useFirestoreQueryData } from "@react-query-firebase/firestore";
-import { collection, query, where, orderBy } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuthContext } from "../contexts/AuthContext";
 
 const useOrders = () => {
-  const { currentUser } = useAuthContext();
-  const { isAdmin } = useAuthContext();
+  const { currentUser, isAdmin } = useAuthContext();
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  if(isAdmin) {
-    const colRef = query(collection(db, "orders"));
+  useEffect(() => {
+    const getQueryRef = () => {
+      const colRef = collection(db, "orders");
+      let queryRef = query(colRef, orderBy("created"));
 
-    const queryRef = query(colRef, orderBy("created"));
-  
-    const usersQuery = useFirestoreQueryData(["orders"], queryRef, {
-      idField: "id",
-      subscribe: true,
+      if (!isAdmin) {
+        queryRef = query(colRef, where("email", "==", currentUser.email), orderBy("created"));
+      }
+
+      return queryRef;
+    };
+
+    const queryRef = getQueryRef();
+
+    const unsubscribe = onSnapshot(queryRef, (snapshot) => {
+      setIsLoading(true);
+
+      const orders = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      setData(orders);
+      setIsLoading(false);
+      setIsError(false);
+    }, (error) => {
+      setIsLoading(false);
+      setIsError(true);
+      console.error("Error fetching orders:", error);
     });
-  
-    return usersQuery;
-  }
-  else {
-    const colRef = query(collection(db, "orders"));
 
-    const queryRef = query(colRef, where("email", "==", currentUser.email), orderBy("created"));
-  
-    const usersQuery = useFirestoreQueryData(["orders"], queryRef, {
-      idField: "id",
-      subscribe: true,
-    });
-  
-    return usersQuery;
-  };
-  }
-  
+    return () => unsubscribe();
+  }, [currentUser, isAdmin]);
 
+  return { data, isLoading, isError };
+};
 
 export default useOrders;

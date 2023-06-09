@@ -3,7 +3,7 @@ import SortableTable from "../components/SortableTable";
 import Container from "react-bootstrap/Container";
 import { useState } from "react";
 
-const OrdersPage = () => {
+const OrdersUserPage = () => {
 
   const { data, isLoading, isError } = useOrders();
 
@@ -49,11 +49,6 @@ const OrdersPage = () => {
       Cell: ({ value }) => <span>{value}</span>,
     },
     {
-      Header: "User",
-      accessor: "email",
-      Cell: ({ value }) => <span>{value}</span>,
-    },
-    {
       Header: "Date",
       accessor: (row) =>
         new Date(row.created.seconds * 1000).toLocaleString("pl-PL"),
@@ -88,7 +83,7 @@ const OrdersPage = () => {
       {isError ? <div>Error loading orders.</div> : null}
       {data && data.length > 0 ? (
         <Container className="py-3 table-container">
-          <SortableTable columns={columns} data={data} filterField={"email"} />
+          <SortableTable columns={columns} data={data} filterField={null} />
         </Container>
       ) : null}
       {data === undefined || data.length === 0 ? (
@@ -98,4 +93,4 @@ const OrdersPage = () => {
   );
 };
 
-export default OrdersPage;
+export default OrdersUserPage;

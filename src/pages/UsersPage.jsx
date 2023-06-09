@@ -37,7 +37,7 @@ const UsersPage = () => {
 				),
 			},
 			{
-				Header: "Userame",
+				Header: "Username",
 				accessor: "name",
 			},
 			{
@@ -73,7 +73,7 @@ const UsersPage = () => {
 
 	return (
 		<Container className="py-3 table-container">
-			{data ? <SortableTable columns={columns} data={data} /> : null}
+			{data ? <SortableTable columns={columns} data={data} filterField={"name"}/> : null}
 		</Container>
 	);
 };

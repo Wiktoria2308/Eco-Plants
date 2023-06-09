@@ -41,7 +41,7 @@ const Navigation = () => {
 	
 	//navbar scroll changeBackground function
   const changeBackground = () => {
-    if (window.scrollY >= 47) {
+    if (window.scrollY >= 30) {
       setNavbar(true)
     } else {
       setNavbar(false)
@@ -55,14 +55,15 @@ const Navigation = () => {
 
 	return (
 		<>
-		{ pathname !== "/shopping-cart" &&  pathname !== "/checkout" && pathname !== "/success" && pathname !== "/cancel" && pathname !== "/shipping" ? <Navbar expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
+		{ pathname !== "/shopping-cart" &&  pathname !== "/checkout" && pathname !== "/success" && pathname !== "/cancel" && pathname !== "/shipping" ? 
+		<Navbar expand="md" sticky="top" className={navbar ? "navbar active" : "navbar"}>
 		<Container className="justify-content-end ">
 			<Navbar.Brand as={Link} to="/" className="nav-brand col-9 col-md-6">
 				<img className="brand-title" src={Title} alt="brand-title" />
 			</Navbar.Brand>
 
-			<Navbar.Toggle aria-controls="basic-navbar-nav" />
-			<Navbar.Collapse id="basic-navbar-nav" className="nav-links">
+			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+			<Navbar.Collapse id="responsive-navbar-nav" className="nav-links">
 				<Nav className="ms-auto align-items-end">
 
 				<PlantsDropdown />
