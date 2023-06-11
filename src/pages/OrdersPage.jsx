@@ -23,14 +23,13 @@ const OrdersPage = () => {
         {products.map((product, index) => (
           <div className="product-item" key={index}>
             <p>
-              <span>Product number:</span> {product.id}
+              <span className="product-details">Product number:</span> {product.id}
             </p>
             <p>
-              <span>Name:</span> {product.name}
+              <span className="product-details">Name:</span> {product.name}
             </p>
-            {/* Add span and make font bold  */}
-            <p>Quantity: {product.quantity}</p>
-            <p>Total sum: {product.total_sum}</p>
+            <p><span className="product-details">Quantity:</span> {product.quantity}</p>
+            <p><span className="product-details">Total sum:</span> {product.total_sum}</p>
             {index !== products.length - 1 && <hr className="separator" />}
           </div>
         ))}

@@ -23,15 +23,11 @@ import EditProductsPage from "./pages/EditProductsPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 import SuccessPage from "./pages/SuccessPage";
 import CancelPage from "./pages/CancelPage";
-import HousePlantsPage from "./pages/HousePlantsPage";
-import GardenPlantsPage from "./pages/GardenPlantsPage";
-import SeedsPage from "./pages/SeedsPage";
-import AccessoriesPage from "./pages/AccessoriesPage";
+import MainCategoryProducts from "./pages/MainCategoryProducts";
 import ShippingPage from "./pages/ShippingPage";
 import OrdersPage from "./pages/OrdersPage";
 import OrdersUserPage from "./pages/OrdersUserPage";
 import AllProductsPage from "./pages/AllProductsPage";
-
 
 function App() {
   return (
@@ -53,47 +49,23 @@ function App() {
         <Route path="/shipping" element={<ShippingPage />} />
         <Route path="/all-products" element={<AllProductsPage />} />
 
+        <Route path="/:category/:type" element={<ProductsPage />} />
+        <Route path="/:category/:type/:id" element={<ProductPage />} />
+        <Route path="/:category/:id" element={<ProductPage />} />
 
-	
-        {[
-          "/house-plants/:type",
-          "/garden-plants/:type",
-          "/seeds/:type",
-          "/accessories/:type",
-        ].map((path, index) => (
-          <Route key={index} path={path} element={<ProductsPage />} />
-        ))}
-
-        {[
-          "/house-plants/cactuses/:id",
-		  "/house-plants/succulents/:id",
-		  "/house-plants/orchids/:id",
-          "/garden-plants/berry-bushes/:id",
-		  "/garden-plants/ornamental-shrubs/:id",
-          "/seeds/vegetable-seeds/:id",
-		  "/seeds/herbs-seeds/:id",
-		  "/seeds/flower-seeds/:id",
-      "/accessories/soil/:id",
-      "/accessories/watering-cans/:id",
-      "/accessories/pots/:id",
-        ].map((path, index) => (
-          <Route key={index} path={path} element={<ProductPage />} />
-        ))}
-
-        {[
-          "/house-plants/:id",
-          "/garden-plants/:id",
-          "/seeds/:id",
-          "/accessories/:id",
-        ].map((path, index) => (
-          <Route key={index} path={path} element={<ProductPage />} />
-        ))}
-		
-
-        <Route path="/house-plants" element={<HousePlantsPage />} />
-        <Route path="/garden-plants" element={<GardenPlantsPage />} />
-        <Route path="/seeds" element={<SeedsPage />} />
-        <Route path="/accessories" element={<AccessoriesPage />} />
+        <Route
+          path="/house-plants"
+          element={<MainCategoryProducts name="Houseplants" />}
+        />
+        <Route
+          path="/garden-plants"
+          element={<MainCategoryProducts name="Garden plants" />}
+        />
+        <Route path="/seeds" element={<MainCategoryProducts name="Seeds" />} />
+        <Route
+          path="/accessories"
+          element={<MainCategoryProducts name="Accessories" />}
+        />
 
         {/* routes for logged in users */}
         <Route

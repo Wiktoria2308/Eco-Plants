@@ -1,6 +1,6 @@
 import PlaceholderPhoto from "../assets/images/placeholder-plant.png";
 import { Card, Col } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { addToCart} from '../reducers/shoppingCartReducer'
@@ -64,7 +64,6 @@ const ProductsListCard = ({ product }) => {
         />
         <Card.Body >
           <Card.Title onClick={handleClick}>{product.name}</Card.Title>
-          
           <Card.Text>
            {product.price} kr
           </Card.Text>

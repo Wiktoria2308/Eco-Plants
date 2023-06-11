@@ -1,12 +1,12 @@
-import useProducts from "../hooks/useProducts";
+import useAllCategoryProducts from "../hooks/useAllCategoryProducts";
 import ProductsList from "../components/ProductsList";
 import { useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-const ProductsPage = () => {
+const MainCategoryProducts = ({ name }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: products, isLoading } = useProducts();
+  const { data: products, isLoading } = useAllCategoryProducts(name);
 
   const filteredProducts = searchQuery
     ? products.filter((product) =>
@@ -40,4 +40,4 @@ const ProductsPage = () => {
     </div>
   );
 };
-export default ProductsPage;
+export default MainCategoryProducts;
