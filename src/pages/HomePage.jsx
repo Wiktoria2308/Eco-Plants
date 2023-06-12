@@ -9,7 +9,6 @@ const HomePage = () => {
   const handleClick = (e) => {
      e.preventDefault(); 
      navigate('/all-products')
-    // navigate('/house-plants')
   }
   
   return (

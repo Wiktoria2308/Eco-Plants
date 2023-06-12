@@ -5,7 +5,7 @@ import Image3 from '../assets/images/plant3.png'
 
 function CarouselPlants() {
     return (
-      <Carousel fade controls={false} interval={4000} indicators={false}>
+      <Carousel fade controls={false} interval={3000} indicators={false}>
         <Carousel.Item>
           <img
             className="d-block w-100"
