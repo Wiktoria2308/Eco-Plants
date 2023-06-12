@@ -32,6 +32,14 @@ const EditProductsPage = () => {
 				Header: "Type",
 				accessor: "type",
 			},
+			{
+				Header: "Price (SEK)",
+				accessor: "price",
+			},
+			{
+				Header: "Quantity",
+				accessor: "quantity",
+			},
 			
 			{
 				accessor: "edit",

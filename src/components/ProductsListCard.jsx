@@ -47,7 +47,7 @@ const ProductsListCard = ({ product }) => {
 
   <Col className="products-list-card-col" style={{maxWidth: '250px'}}>
       <Card className="products-list-card">
-           {!isImageLoaded && (
+      {!isImageLoaded && (
            <Card.Img
               variant="top"
               src={PlaceholderPhoto}

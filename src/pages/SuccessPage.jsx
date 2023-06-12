@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import { resetStateTotal } from "../reducers/totalPrice";
 import { resetStateCart } from "../reducers/shoppingCartReducer";
 import { useDispatch } from "react-redux";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc} from "firebase/firestore";
 import { db } from "../firebase/index";
 import { useSelector } from "react-redux";
-
+import useProduct from "../hooks/useProduct";
 
 
 axios.defaults.baseURL = "https://api.stripe.com";
@@ -20,7 +20,7 @@ axios.defaults.headers.common = { Authorization: `Bearer ${stripe_api_key}` };
 
 const SuccessPage = () => {
   let [searchParams] = useSearchParams();
-
+  const { updateProductQuantity } = useProduct();
   const dispatch = useDispatch();
   const sessionID = searchParams.get("session_id");
   const products = useSelector(state => state.shoppingCart.value)
@@ -65,6 +65,12 @@ const SuccessPage = () => {
           await addDoc(collection(db, "orders"), {
             ...data,
          }); 
+
+         products.forEach(async (product) => {
+          const newQuantity = product.quantity - product.shopQuantity;
+          updateProductQuantity(product.id, newQuantity )
+        });
+
         }catch(error) {  
           console.warn(error);
     }

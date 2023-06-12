@@ -1,5 +1,5 @@
 import useStreamDocument from "./useStreamDocument";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const useProduct = () => {
@@ -7,6 +7,11 @@ const useProduct = () => {
 	const getProduct = (id) => {
 		return useStreamDocument("products", id);
 	};
+
+	const updateProductQuantity = async (id, newQuantity) => {
+		const productRef = doc(db, "products", id);
+		await updateDoc(productRef, { quantity: newQuantity });
+	  };
 
 	const deleteProduct = async (id) => {
 		const docRef = doc(db, "products", id);
@@ -16,6 +21,7 @@ const useProduct = () => {
 	return {
 		getProduct,
 		deleteProduct,
+		updateProductQuantity,
 	};
 };
 
