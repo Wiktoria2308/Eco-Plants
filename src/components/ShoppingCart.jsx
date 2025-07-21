@@ -18,8 +18,6 @@ const ShoppingCart = () => {
     const products = useSelector(state => state.shoppingCart.value)
 	const total = useSelector(state => state.total.balance)
 
-	console.log(products)
-
     const addMoreProducts = (product, value) => {
     // sent two parameters to reducer product object and value to change
     dispatch(changeQuantity([product, value]));    
